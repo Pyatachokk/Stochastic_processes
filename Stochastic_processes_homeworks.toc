@@ -1,0 +1,16 @@
+\babel@toc {russian}{}
+\contentsline {section}{\numberline {1}\IeC {\CYRD }\IeC {\CYRZ } 1}{1}{section.1}
+\contentsline {subsection}{\numberline {1.1}\IeC {\CYRZ }\IeC {\cyra }\IeC {\cyrd }\IeC {\cyra }\IeC {\cyrch }\IeC {\cyra } 1}{1}{subsection.1.1}
+\contentsline {subsubsection}{\numberline {1.1.1}i}{2}{subsubsection.1.1.1}
+\contentsline {subsubsection}{\numberline {1.1.2}ii}{3}{subsubsection.1.1.2}
+\contentsline {subsection}{\numberline {1.2}\IeC {\CYRZ }\IeC {\cyra }\IeC {\cyrd }\IeC {\cyra }\IeC {\cyrch }\IeC {\cyra } 2}{3}{subsection.1.2}
+\contentsline {subsection}{\numberline {1.3}\IeC {\CYRZ }\IeC {\cyra }\IeC {\cyrd }\IeC {\cyra }\IeC {\cyrch }\IeC {\cyra } 3}{4}{subsection.1.3}
+\contentsline {subsection}{\numberline {1.4}\IeC {\CYRZ }\IeC {\cyra }\IeC {\cyrd }\IeC {\cyra }\IeC {\cyrch }\IeC {\cyra } 4}{4}{subsection.1.4}
+\contentsline {subsubsection}{\numberline {1.4.1}i}{4}{subsubsection.1.4.1}
+\contentsline {subsubsection}{\numberline {1.4.2}ii}{5}{subsubsection.1.4.2}
+\contentsline {subsection}{\numberline {1.5}\IeC {\CYRZ }\IeC {\cyra }\IeC {\cyrd }\IeC {\cyra }\IeC {\cyrch }\IeC {\cyra } 5}{5}{subsection.1.5}
+\contentsline {subsubsection}{\numberline {1.5.1}i}{5}{subsubsection.1.5.1}
+\contentsline {subsubsection}{\numberline {1.5.2}ii}{6}{subsubsection.1.5.2}
+\contentsline {subsubsection}{\numberline {1.5.3}iii}{6}{subsubsection.1.5.3}
+\contentsline {subsubsection}{\numberline {1.5.4}iv}{7}{subsubsection.1.5.4}
+\contentsline {subsection}{\numberline {1.6}\IeC {\CYRZ }\IeC {\cyra }\IeC {\cyrd }\IeC {\cyra }\IeC {\cyrch }\IeC {\cyra } 6}{7}{subsection.1.6}
