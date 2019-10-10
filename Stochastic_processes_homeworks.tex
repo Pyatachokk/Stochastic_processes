@@ -746,6 +746,152 @@ q + \frac{2m}{M + m} < \frac{1 - p}{p}
 \[  \lim\limits_{t \rightarrow +\infty} \frac{\E(N_t)}{t} = \frac{1}{\mu}    \]
 
 
+\section{Домашнее задание 3}
+
+\subsection{Номер 1}
+\subsubsection{i}
+
+Докажем по индукции. Начальное условие:
+
+\[ S_1 = \frac{\beta^\alpha}{\Gamma(\alpha)} x^{\alpha-1} e^{-\beta x} \]
+
+Индукционный переход:
+
+\[ n \to n+1, S_{n+1} = S_n + \xi_{n+1} \]
+
+\begin{equation}
+\begin{aligned}
+f_{S_{n+1}}(x) = \int_{\R+} f_{S_n}(x-y)f_{\xi_{n+1}}(y)dy = & \int_{\R+} \frac{\beta^{n\alpha}}{\Gamma(n\alpha)} x^{n\alpha-1} e^{-\beta x} I\{x-y>0\} \cdot \frac{\beta^\alpha}{\Gamma(\alpha)} x^{\alpha-1} e^{-\beta x} I\{y>0\} dy =\\
+\frac{\beta^{(n+1)\alpha}}{\Gamma(n\alpha) \Gamma(\alpha)} e^{\beta x} \underbrace{ \int_{0}^{x} (x-y)^{n\alpha - 1} y^{\alpha-1} dy}_{I} =  \dots
+\end{aligned}
+\end{equation}
+
+
+\begin{equation}
+\begin{aligned}
+I = \int_{0}^{x} (x-y)^{n\alpha - 1} y^{\alpha-1} dy = |z = \frac{y}{x}| = \int_{0}^{1} (x - zx)^{n\alpha - 1}zx^{\alpha-1} x dz =&\\ = \text{По свойству Бета-функции} = x^{(n+1)\alpha - 1} \frac{\Gamma(n\alpha) \Gamma(\alpha)}{\Gamma((n+1)\alpha)}
+\end{aligned}
+\end{equation}
+
+
+\begin{equation}
+\begin{aligned}
+\dots = \frac{\beta^{(n+1)\alpha} x^{(n+1) \alpha - 1}}{\Gamma((n+1)\alpha)} e^{-\beta x} = f_{S_{n+1}}(x)
+\end{aligned}
+\end{equation}
+
+\subsubsection{ii}
+
+\[ P\{N_t = n\} = P\{S_n \le t\} - {\{ S_{n+1} \le t \}} \]
+
+
+\begin{equation}
+\begin{aligned}
+F_{S_n}(x) = \int_{0}^{t} \frac{\beta^{n\alpha}}{\Gamma(n\alpha)} x^{n\alpha-1} e^{-\beta x} dx
+\end{aligned}
+\end{equation}
+
+\begin{equation}
+\begin{aligned}
+ P\{N_t = n\} = \int_{0}^{t} \frac{\beta^{n\alpha}}{\Gamma(n\alpha)} x^{n\alpha-1} e^{-\beta x} dx - \int_{0}^{t} & \frac{\beta^{(n+1)\alpha}}{\Gamma((n+1)\alpha)} x^{(n+1)\alpha-1} e^{-\beta x} dx = \\
+ \int_{0}^{t} \beta^{n\alpha} x^{n\alpha-1} e^{-\beta x} (\frac{1}{\Gamma(N\alpha)} - \frac{\beta^\alpha}{\Gamma((n+1)\alpha)}x^\alpha) 
+\end{aligned}
+\end{equation}
+
+Я не знаю, как дальше брать этот интеграл кроме как численно. Ну может тут тоже есть какой-то финт ушами через дискретную вариацию распределения аля Эрланг, но я не придумал, как его тут применить. Оставлю тут просто солнышко. Вот оно: \Sun
+
+
+\subsection{Номер 2}
+
+Предположим независимость случайных величин $ S_2 $ и $ \gamma $ (суммарное время обслуживания первого клиента). Это тонкий момент. Я так и не смог привести контрпример к независимости. Вопрос в том, можно ли отделить время прихода первого покупателя от времени стрижки. В таком случае простое ручное вычисление $ \Cov(\xi_1 + \xi_2, \xi_2 + \eta) $ Даст как минимум $ \Var(\xi_1) $. Следственно, предположим, что вторая величиина неделима и независима от $ \xi_1 $. Иначе задача нерешаема в текущих условиях.
+
+Где необходимо, будем пользоваться следующим утверждением (очевидно, по Лопеталю):
+\[ \lim\limits_{x \to +\infty} x e^{-x} = 0 \]
+
+
+\begin{equation}
+\begin{aligned}
+P\{ \xi_1 + \xi_2 < \gamma \} = \iint_{x_1 < x_2} \lambda_1^2 x_1 e^{-\lambda_1x_1} \lambda_2 e^{-\lambda_2x_2 } dx_1 dx_2 = 
+\lambda_1^2\lambda_2 \int_{0}^{+ \infty} \int_{x_1}^{+ \infty} x_1 e^{-(\lambda_1x_1 + \lambda_2 x_2 )} dx_2 dx_1 = \\
+\lambda_1^2\lambda_2 \int_{0}^{+ \infty} \left( -\frac{x_1 e^{-(\lambda_1x_1 + \lambda_2 x_2 )}}{\lambda_2} \bigg|^{+ \infty}_{x_1} \right) dx_1= \lambda_1^2\lambda_2 \int_{0}^{+ \infty} \left( \frac{x_1 e^{-(\lambda_1 + \lambda_2) x_1}}{\lambda_2} \right) dx_1 = \\ \lambda_1^2 \int_{0}^{+ \infty} \left( x_1 e^{-(\lambda_1 + \lambda_2) x_1} \right) dx_1 = \lambda_1^2 \left( \frac{x_1 e^{-(\lambda_1 + \lambda_2) x_1}}{-(\lambda_1 + \lambda_2)} \bigg |^{+\infty}_0 - \int_{0}^{+ \infty} \frac{ e^{-(\lambda_1 + \lambda_2) x_1}}{-(\lambda_1 + \lambda_2)} dx_1 \right) = \\ - \lambda_1^2 \left( \int_{0}^{+ \infty} \frac{ e^{-(\lambda_1 + \lambda_2) x_1}}{-(\lambda_1 + \lambda_2)} dx_1 \right)
+= -\lambda_1^2 \left(  \frac{ e^{-(\lambda_1 + \lambda_2) x_1}}{(\lambda_1 + \lambda_2)^2}\bigg |^{+\infty}_0 \right) =
+\frac{\lambda_1^2}{(\lambda_1 + \lambda_2)^2} = \frac{\frac{1}{100}}{(\frac{35}{250})^2} \approx 0.51
+\end{aligned}
+\end{equation}
+
+
+\subsection{Номер 3}
+
+\subsection{Номер 4}
+
+Необходимо найти следующую вероятность: 
+
+\[ P\{ N_{30} \le 3 | N_{10} \ge 2 \} \]
+
+Эту вероятность можно расписать по формуле полной вероятности. Это событие реализуется при трёх возможных условиях:
+
+\[ N_t = 2, N_t = 3, N_t \ge 4 \]
+
+Важно отметить, что $ (A|N_t = 2 | N_t \ge 2) = (A|N_t = 2)) $. Первый элемент уравнения -- событие, на которое наложены сразу два условия. Вероятности условий также должны стать условными событиями. Только тогда их сумма будет равняться единице.
+
+
+
+В таком случае, запишем формулу следующим образом:
+
+\begin{equation}
+\begin{aligned}
+ P\{ N_{30} \le 3 | N_{10} \ge 2 \}  = P\{ N_{30} \le 3 | N_{10} = 2 \} P\{ N_{10} = 2 | N_{10} \ge 2 \} + & \\ P\{ N_{30} \le 3 | N_{10} = 3 \} P\{ N_{10} = 3 | N_{10} \ge 2 \} + P\{ N_{30} \le 3 | N_{10} \ge 4 \} P\{ N_{10} \ge 4 | N_{10} \ge 2 \} = & \\(P\{ N_{30} - N_{10} = 0 \} + P\{ N_{30} - N_{10} = 1 \}) P\{ N_{10} = 2 | N_{10} \ge 2 \} + P\{ N_{30} - N_{10} = 0 \} P\{ N_{10} = 3 | N_{10} \ge 2 \}
+\end{aligned}
+\end{equation}
+
+Найдём все необходимые нам вероятности. Для этого воспользуемся доказанным на лекции утверждением:
+
+\[ N_t - N_s \sim Pois(\lambda(t - s)) \forall t,s \ge 0, t > s \]
+
+Следовательно:
+
+\[ P\{ N_t - N_s = k \} = \frac{(\lambda(t-s))^k}{k!}e^{-\lambda(t-s)}\]
+
+
+
+При $ t - s = 5 $ получим математическое ожидание процесса приращений равное одной квартире. Соответственно, параметр интенсивности такого распределения вычисляется следующим образом:
+\[  \lambda(t - s) = 1 \Rightarrow \lambda = \frac{1}{t-s} \Rightarrow \lambda = \frac{1}{5}\]
+
+
+\[ P\{N_{10} = 0 \} =  e^{-2}  \approx 0.14\]
+
+\[ P\{N_{10} = 1 \} =  2e^{-2}  \approx 0.28\]
+
+\[ P\{N_{10} = 2 \} = \frac{(\frac{1}{5} 10)^2}{2!} e^{-2}  \approx 0.27\]
+
+\[ P\{N_{10} = 3 \} = \frac{(\frac{1}{5} 10)^3}{3!} e^{-2}  \approx 0.18\]
+
+\[ P\{N_{10} \ge 4 \} =1 -0.14 -0.28 - 0.27 - 0.18 =0.13 \]
+
+
+
+\[ P\{ N_{30} - N_{10} = 0 \} = \frac{1}{0!} e^{-\frac{1}{5}20} \approx 0.018\]
+
+\[ P\{ N_{30} - N_{10} = 1 \} = \frac{\frac{1}{5}(30-10)}{1!} e^{-\frac{1}{5}20} = 4 e^{-4} \approx 0.073\]
+
+\[ P\{ N_{10} = 2 | N_{10} >= 2\} = \frac{0.27}{0.27 + 0.18 + 0.13} \approx 0.465 \]
+
+\[ P\{ N_{10} = 3 | N_{10} >= 2\} = \frac{0.18}{0.27 + 0.18 + 0.13} \approx 0.31 \]
+
+\[ P\{ N_{10} \ge 4 | N_{10} >= 2\} = \frac{0.13}{0.27 + 0.18 + 0.13} \approx 0.22 \]
+
+
+Засунем всё обратно в формулу:
+
+\begin{equation}
+\begin{aligned}
+P\{ N_{30} \le 3 | N_{10} \ge 2 \}  = (0.018 + 0.073) \cdot 0.465 + 0.018 \cdot 0.31 = 0.0423 + 0.00558 = 0.04788
+\end{aligned}
+\end{equation}
+
+
+
+
 
 
 \end{document}
