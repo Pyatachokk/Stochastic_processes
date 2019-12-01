@@ -107,6 +107,10 @@
 \renewcommand{\L}{\mathrm{L}}
 
 
+\usepackage{pgf}
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata}
+
 
 % DEFS
 \def \mbf{\mathbf}
@@ -203,6 +207,9 @@
 	
 \newpage
 \tableofcontents
+
+\newpage
+
 \section{Домашнее задание 1}
 
 \subsection{Задача 1}
@@ -221,35 +228,35 @@
 
 В зависимости от того, будет реализация случайной величины положительной или отрицательной, кривые будут либо экспоненциально возрастать, либо экспоненциально убывать, где $ \xi $ будет служить коэффициентом скорости роста. Чем ближе $ \xi $ к единице, тем быстрее будет возрастать кривая траектории, а чем ближе к минус единице, тем быстрее убывать. Соответственно, семейство кривых ограничено сверху кривой $ X_t = e^\xi $, а снизу -- кривой   $ X_t = e^{-\xi} $. Графики возможных траекторий можно увидеть на Рис. \ref{traj} слева.
 
-Найдём конечномерные распределения процесса. Для простоты записи покажу на двумерном примере, а далее разширим до многомерного случая.
+Найдём конечномерные распределения процесса. Для простоты записи покажу на двумерном примере, а далее расширим до многомерного случая.
 
 \begin{enumerate}[\Sun]
-	\item Очевидно, что $ P\{X_1 \le x_1, X_2 \le x_2\} = 0 $ при $ x_1 \le 0 или х_2 \le $, так как показательнаяя функция от экспоненты не может быть отрицательной или нулевой.
+	\item Очевидно, что $ P\{X_1 \le x_1, X_2 \le x_2\} = 0 $ при $ x_1 \le 0 $или $х_2 \le 0 $, так как показательнаяя функция от экспоненты не может быть отрицательной или нулевой.
 	
 	\item При $ x_1 \ge 1 \text{ и } x_2 \ge 1 $ :
-
+	
 	\begin{equation}
 	\begin{aligned}
-	 P\{X_1 \le x_1, X_2 \le x_2\}=  P\{e^{\xi t_1}& \le x_1, e^{\xi t_2} \le x_2\} = P\{\xi t_1 \le ln(x_1), \xi t_2 \le ln(x_2)\} =\\ P\{ \xi \le min\left(\frac{ln(x_1)}{t_1}, \frac{ln(x_2)}{t_2}\right) \} 
-	 \end{aligned}
-	 \end{equation}
-	 
-	 \item При $ x_1 \ge 1 \text{ и } 0 < x_2 < 1 $ :
-	 
- 	\begin{equation}
- 	\begin{aligned}
-	 P\{X_1 \le x_1, X_2 \le x_2\}=  P\{e^{\xi t_1}& \le x_1, e^{\xi t_2} \le x_2\} = P\{\xi t_1 \le ln(x_1), \xi t_2 \le ln(x_2)\} = \\  P\{ \xi \le min\left(\frac{ln(x_1)}{t_1}, \frac{ln(x_2)}{t_2}\right) \} 
-	 \end{aligned}
-	 \end{equation}
-	 
-	 Так как $ ln(x_2) $ , будет отрицательным, $ ln(x_1) $ - положительным, то $  P\{ \xi \le \frac{ln(x_2)}{t_2} \} $ будет ответом в данном случае. 
-	 
-	 \item При $ x_2 \ge 1 \text{ и } 0 < x_1 < 1 $ :
-	 
-	 Абсолютно аналогично предыдущему случаю
-	 
-	 \item При $ 0 < x_2 < 1 \text{ и } 0 < x_1 < 1 $ :
-	 
+	P\{X_1 \le x_1, X_2 \le x_2\}=  P\{e^{\xi t_1}& \le x_1, e^{\xi t_2} \le x_2\} = P\{\xi t_1 \le ln(x_1), \xi t_2 \le ln(x_2)\} =\\ P\{ \xi \le min\left(\frac{ln(x_1)}{t_1}, \frac{ln(x_2)}{t_2}\right) \} 
+	\end{aligned}
+	\end{equation}
+	
+	\item При $ x_1 \ge 1 \text{ и } 0 < x_2 < 1 $ :
+	
+	\begin{equation}
+	\begin{aligned}
+	P\{X_1 \le x_1, X_2 \le x_2\}=  P\{e^{\xi t_1}& \le x_1, e^{\xi t_2} \le x_2\} = P\{\xi t_1 \le ln(x_1), \xi t_2 \le ln(x_2)\} = \\  P\{ \xi \le min\left(\frac{ln(x_1)}{t_1}, \frac{ln(x_2)}{t_2}\right) \} 
+	\end{aligned}
+	\end{equation}
+	
+	Так как $ ln(x_2) $ , будет отрицательным, $ ln(x_1) $ - положительным, то $  P\{ \xi \le \frac{ln(x_2)}{t_2} \} $ будет ответом в данном случае. 
+	
+	\item При $ x_2 \ge 1 \text{ и } 0 < x_1 < 1 $ :
+	
+	Абсолютно аналогично предыдущему случаю
+	
+	\item При $ 0 < x_2 < 1 \text{ и } 0 < x_1 < 1 $ :
+	
 	$  P\{X_1 \le x_1, X_2 \le x_2\}= \cdots  P\{ \xi \le min\left(\frac{ln(x_1)}{t_1}, \frac{ln(x_2)}{t_2}\right) \}  $
 	
 	В данном случае оба числа будут отрицательными и формула останется без сокращений.
@@ -258,12 +265,12 @@
 	
 	$ F_\xi(x_1, \cdots, x_n) = P\{X_1 \le x_1,\cdots, X_n \le x_n\} = 
 	\begin{cases}
-		0, \text{ если }  \exists j \text{ s.t. } x_j <= 0, j = 1:n \\
-		F_\xi\left(min\left(\frac{ln(x_1)}{t_1},  \cdots, \frac{ln(x_n)}{t_n}\right) \right)
+	0, \text{ если }  \exists j \text{ s.t. } x_j <= 0, j = 1:n \\
+	F_\xi\left(min\left(\frac{ln(x_1)}{t_1},  \cdots, \frac{ln(x_n)}{t_n}\right) \right)
 	\end{cases} $
 	
 	где $ F_\xi(x) $ - функция распределения равномерной случайной величины $ \xi $ на $ [-1, 1] $
-	 
+	
 \end{enumerate}
 
 \subsubsection{ii}
@@ -272,7 +279,7 @@
 
 Что же касается конечномерного распределения, то здесь всё довольно похоже на предыдущий пунктб поэтому напишу с минимумом подробностей. Решим для двумерного случая и расширим на многомерный.
 
- Для начала, однако, установим параметры нормального распределения случайной величины $ \xi + \eta $. Математическое ожидание ноль. Ковариация двух величин тоже ноль, так что дисперсия равна 1. Получим стандартную нормальную величину.
+Для начала, однако, установим параметры нормального распределения случайной величины $ \xi + \eta $. Математическое ожидание ноль. Ковариация двух величин тоже ноль, так что дисперсия равна 1. Получим стандартную нормальную величину.
 
 \[  P\{X_1 \le x_1, X_2 \le x_2\} = P\{ \xi + \eta \le x_1 t_1, \xi + \eta \le x_2 t_2 \} = P\{ \xi + \eta \le min(x_1 t_1, x_2 t_2) \} \]
 
@@ -291,8 +298,8 @@
 	$ x_1 t_1 $ будет положительной величиной, а $ x_2 t_2 $ - отрицательной. Ответ: $ F_{N_{(0,1)}}(min(x_1 t_1, x_2 t_2)) = F_{N_{(0,1)}}(x_2 t_2) $
 	
 	\item $ x_1 < 0, x_2 > 0 $ 
-		Ответ зеркален предыдущему. 
-		
+	Ответ зеркален предыдущему. 
+	
 \end{enumerate}
 Очевидно, что с повышением размерности ни один из этих вариантов не будет нарушаться. При наличии хотя бы одной отрицательной переменной $ x_j $ среди положительных, она автоматически станет минимумом, а при всех переменных одного знака формула и вовсе не упрощается. Следовательно, без потери общности, запишем ответ:
 
@@ -303,8 +310,8 @@
 \[ P\{X_{t_1} < X_{t_2}\} = P\{t_1(\xi_1 + \alpha(\xi_2 + 2\alpha))<t_1(\xi_1 + \alpha(\xi_2 + 2\alpha)) \}=  \]
 \[
 P\{ (t_1 - t_2)\xi_1 + (t_1 - t_2)\alpha \xi_2 < (t_2 - t_1)2\alpha^2\} = \\P\{ \xi_1 + \alpha\xi_2 \ge -2\alpha^2\} = P\{ \xi_1 + \alpha\xi_2 + 2\alpha^2 \ge 0\} = 1\]
-	
-	
+
+
 Чтобы вероятность того, что эта случайная величина была положительной стала равной единице, рассмотрим график. Так как указано, что параметр $ \alpha $ является реальным числом, будем рассматривать только случаи с положительным дискриминантом. Чтобы учесть максимальное количество случаев, при которых значение функции в точке положительно, максимально "опустим" параболу, максимизировав дискриминант. Очевидно, что это произойдёт в двух точках относительно $ \xi $: (1, -1), (-1, -1)
 
 \[ D = \xi_2^2 - 8\xi_1 \]
@@ -317,12 +324,12 @@ P\{ (t_1 - t_2)\xi_1 + (t_1 - t_2)\alpha \xi_2 < (t_2 - t_1)2\alpha^2\} = \\P\{ 
 Все мозможные случаи корней при $ \xi_2 = +- 1 $:
 \[ 
 \begin{cases}
-	\alpha_{11} = -\frac{1}{2}\\
-	\alpha_{12} = -1\\
-	\alpha_{21} = \frac{1}{2}\\
-	\alpha_{22} = 1
+\alpha_{11} = -\frac{1}{2}\\
+\alpha_{12} = -1\\
+\alpha_{21} = \frac{1}{2}\\
+\alpha_{22} = 1
 \end{cases}
- \]
+\]
 
 Следовательно, при $ \alpha \in [-1, 1] $ все возможные параболы будут принимать только неотрицательные значения.
 Ответ:  $ \alpha \in [-1, 1] $ 
@@ -346,7 +353,7 @@ L [ U ] ( u ) = \frac { \frac { 4 + 3 u } { 2 u ^ { 2 } + 6 u + 4 } } { u \left(
 
 \[ 
 \frac { 3 u + 4 } { u ^ { 2 } ( 2 u + 3 ) } = \frac { A } { u } + \frac { B } { u ^ { 2 } } + \frac { C } { u + 3 }  = \frac { A u ( 2 u + 3 ) + B ( 2 u + 3 ) + C u ^ { 2 } } { u ^ { 2 } ( 2 u + 3 ) } = \frac { 2 A u ^ { 2 } + C u ^ { 2 } + 3 A u + 2 B u + 3 B } { u ^ { 2 } ( 2 u + 3 ) }
- \]
+\]
 
 \begin{equation}
 \left\{ \begin{array} { l } { C + 2 A = 0 } \\ { 3 A + 2 B = 3 } \\ { 3 B = 4 } \end{array} \Rightarrow \left\{ \begin{array} { l } { A = \frac { 1 } { 9 } } \\ { B = \frac { 4 } { 3 } } \\ { C = - \frac { 2 } { 9 } } \end{array} \right. \right.
@@ -358,7 +365,7 @@ L [ U ] ( u ) = \frac { \frac { 4 + 3 u } { 2 u ^ { 2 } + 6 u + 4 } } { u \left(
 \subsection{Задача 4}
 \subsubsection{i}
 
- \begin{wrapfigure}{l}{0.4\textwidth}
+\begin{wrapfigure}{l}{0.4\textwidth}
 	\includegraphics[width=\linewidth]{13}
 	\caption{$  f_{\xi - \eta}(x) $}
 	\label{minmax}
@@ -368,19 +375,19 @@ L [ U ] ( u ) = \frac { \frac { 4 + 3 u } { 2 u ^ { 2 } + 6 u + 4 } } { u \left(
 Для начала выведем несколько необходимых свойств функций плотностей.
 \begin{equation}
 \begin{aligned}
-	F_{|\xi|} = P\{|\xi| \le x\}  = P\{-x \le \xi \le x \} =\\ P\{\xi \le x \} - P\{\xi \le -x \} = F_\xi(x) - F_\xi(-x) 
+F_{|\xi|} = P\{|\xi| \le x\}  = P\{-x \le \xi \le x \} =\\ P\{\xi \le x \} - P\{\xi \le -x \} = F_\xi(x) - F_\xi(-x) 
 \end{aligned}
 \end{equation}
 Следовательно:
- \[ f_{|\xi|}(x) = f_\xi(x) + f_\xi(-x) \] 
- 
- Теперь по формуле свёртки выведем следующую плотность:
- 
- \[ f_{\xi - \eta}(x) = f_{\xi + (-\eta)}(x) \]
- 
+\[ f_{|\xi|}(x) = f_\xi(x) + f_\xi(-x) \] 
+
+Теперь по формуле свёртки выведем следующую плотность:
+
+\[ f_{\xi - \eta}(x) = f_{\xi + (-\eta)}(x) \]
+
 Для этого выведем следующее свойство:
 
- 
+
 \[  F_{-\eta}(x) = P\{-\eta \le x\} = P\{\eta \ge -x\} =\\ 1 -F_{\eta}(-x) \Rightarrow f_{-\eta}(x) = f_{\eta}(-x) \] 
 
 Теперь возьмём интеграл:
@@ -400,10 +407,13 @@ L [ U ] ( u ) = \frac { \frac { 4 + 3 u } { 2 u ^ { 2 } + 6 u + 4 } } { u \left(
 \begin{cases}
 0, u < 0\\
 2(min(u,0) - max(u-1,-1)), u \ge 0
+\end{cases} \Rightarrow \begin{cases}
+0, u < 0\\
+-u + 1, u \ge 0
 \end{cases}
- \]
- 
- Нетрудно проверить, что эта функция будет соответствовать всем необходимым свойствам функции плотности.
+\]
+
+Нетрудно проверить, что эта функция будет соответствовать всем необходимым свойствам функции плотности.
 
 
 \subsubsection{ii}
@@ -413,7 +423,7 @@ L [ U ] ( u ) = \frac { \frac { 4 + 3 u } { 2 u ^ { 2 } + 6 u + 4 } } { u \left(
 \begin{aligned}
 f_{\xi + \eta} = \int_{-\infty}^{\infty} \frac{1}{4} \exp^{-|u-x|-|x|} dx=  \frac{1}{4}  \left( \int_{-\infty}^{0} \exp^{-|u-x|+x} dx + \int_{0}^{\infty}  \exp^{-|u-x|-x} dx \right) = \\ \frac{1}{4} \left( \int_{-\infty}^{min(u,0)} \exp^{-u+2x} dx+ \int_{min(u,0)}^{0} \exp^{u} dx+ \int_{0}^{max(u,0)}  \exp^{-u} dx + \int_{max(u,0)}^{+\infty}  \exp^{u-2x} dx \right) = \\
 \frac{1}{4} \left( \frac{1}{2}\exp^{-u+2x} \Biggr|_{-\infty}^{min(u,0)}  + x \exp^u \Biggr|_{min(u,0)}^{0} + x \exp^{-u} \Biggr|_{0}^{max(u, 0)}  - \frac{1}{2} \exp^{u-2x} \Biggr|_{max(u, 0)}^{+\infty} \right) = \\
-\frac{1}{4} \left( \frac{1}{2}\exp^{-u+2min(u,0)} - min(u,0) \exp^u + max(u,0) \exp^{-u} + \frac{1}{2} \exp^{u-2max(u, 0)} \right)
+\frac{1}{4} \left( \frac{1}{2}\exp^{-u+2min(u,0)} - min(u,0) \exp^u + max(u,0) \exp^{-u} + \frac{1}{2} \exp^{u-2max(u, 0)} \right) =\\ \frac{1}{4} \left( \I\{u \ge 0\} e^{-u}(1+u) + \I\{u < 0\} e^{u}(1-u) \right)
 \end{aligned}
 \end{equation*}
 
@@ -457,7 +467,7 @@ P\{  \sum_{i = 1}^{t_1}\xi_i \le x_1, \sum_{i = 1}^{t_2}\xi_i \le x_2, \cdots, \
 
 \begin{equation*}
 \begin{aligned}
- P\{  \sum_{i = 1}^{t_1}\xi_i \le x_1, \sum_{i = t_1 + 1}^{t_2}\xi_i \le x_2 - x_1, \cdots, \sum_{i = t_{n-1}}^{t_n}\xi_i \le x_n - x_{n-1}\} =&\\ F^{*t_1}(x_1) \cdot F^{*(t_2 - t_1)}(x_2 - x_1) \cdot \cdots \cdot F^{*(t_n - t_{n-1})}(x_n - x_{n-1})
+P\{  \sum_{i = 1}^{t_1}\xi_i \le x_1, \sum_{i = t_1 + 1}^{t_2}\xi_i \le x_2 - x_1, \cdots, \sum_{i = t_{n-1}}^{t_n}\xi_i \le x_n - x_{n-1}\} =&\\ F^{*t_1}(x_1) \cdot F^{*(t_2 - t_1)}(x_2 - x_1) \cdot \cdots \cdot F^{*(t_n - t_{n-1})}(x_n - x_{n-1})
 \end{aligned}
 \end{equation*}
 
@@ -465,8 +475,8 @@ P\{  \sum_{i = 1}^{t_1}\xi_i \le x_1, \sum_{i = 1}^{t_2}\xi_i \le x_2, \cdots, \
 
 $ F_\xi(x_1, \cdots, x_n) =
 \begin{cases}
-	0, \text{ если } \exists \text{ j s.t. } x_j - x_{j-1}  < t_j - t_{j-1} \\
- F^{*t_1}(x_1) \cdot F^{*(t_2 - t_1)}(x_2 - x_1) \cdot \cdots \cdot F^{*(t_n - t_{n-1})}(x_n - x_{n-1}) \text{ иначе }
+0, \text{ если } \exists \text{ j s.t. } x_j - x_{j-1}  < t_j - t_{j-1} \\
+F^{*t_1}(x_1) \cdot F^{*(t_2 - t_1)}(x_2 - x_1) \cdot \cdots \cdot F^{*(t_n - t_{n-1})}(x_n - x_{n-1}) \text{ иначе }
 \end{cases}
 $
 
@@ -534,9 +544,34 @@ $ N_t = max\{ k, S_k \le t \} = max\{ k, Z_k - c \le t \} = max\{ k, Z_k \le t +
 \subsection{Задача 2} 
 
 \subsubsection{i}
- 
- Это событие будет подчиняться геометрическому распределению. По всем известной формуле математического ожидания это будет $ \frac{1}{p} $
 
+Пусть очередная проверка прервёт случайный процесс в точке $ J $. Это номер проверки, при которой обнаружат первое нарушение.
+
+Тогда по тождеству Вальда $ \E S_J = \E J \cdot \E \xi_i $
+
+\[ \E J = 1 \cdot p + 2 \cdot p(1-p) + 3 \cdot p(1-p)^2 = p \cdot \sum_{i=1}^{\infty} i \cdot(1-p)^{i-1} \]
+
+\[
+g(1-p) = \sum_{i=1}^{\infty}(1-p)^{i}=\frac{1}{1-(1-p)}=\frac{1}{p}
+\]
+
+\[
+g^{\prime}(1-p)=\left(\sum_{i=1}^{\infty}(1-p)^{i}\right)^{\prime}=\sum_{i=1}^{\infty} i \cdot(1-p)^{i-1}
+\]
+
+Но 
+
+\[
+g^{\prime}(1-p)=-1 \cdot\left(-\frac{1}{p^{2}}\right)=\frac{1}{p^{2}}
+\]
+
+\[
+E[J]=p \cdot \frac{1}{p^{2}}=\frac{1}{p}
+\]
+
+\[
+E\left[S_{J}\right]=\frac{1}{p} \cdot 45=\frac{45}{p}
+\]
 \subsubsection{ii}
 
 Процесс восстановления: $ S_n = S_{n-1} + \xi_n $
@@ -561,36 +596,36 @@ $ \E \xi_i = 45 $
 
 Рассмотрим две альтернативы поведения. Первый вариант поведения владельца это экономия. Усредним возможные профиты и лоссы. В таком случае в любой конкретный день он в среднем будет получать профит $ A - B $. Константу сколько не усредняй, останется константой. Однако он будет в среднем получать асимптотическиий штраф  $ Y(t) \to \frac{\t p C}{90} $, который мы вычислили в предыдущем пункте.
 
-В ином вариант, когда владелец выбирает не экономить, он не получает выгоды, но в среднем каждый день теряет $ А $ рублей.
+В ином вариант, когда владелец выбирает не экономить, он не получает выгоды, но в среднем каждый день теряет A рублей.
 
- В таком случае владельцу будет выгодно экономить, если средяя "чистая прибыль" от экономии будет больше, чем от экономии, то есть:
- 
- \[ A - B - \frac{Y(t)}{t} > -A \]
- 
- \[ A - B - \frac{p C}{90} > -A \]
- 
- В таком случае владельцу будет выгодна первая стратегия даже если чистая прибыль от экономии будет отрицательной из-за штрафов, но будет больше чем $ -A $, то экономия всё равно останется оптимальной. Преобразуя неравенство, получим:
- 
- \[  2A - B - \frac{pC}{90} > 0 \Rightarrow \frac{90(2A-B)}{C(\frac{A}{B})} > p\]
- 
- Если честно, я не понял, как использовать зависимость $ С $ от дроби. Разве что наложить дополнительные условия на производную $ C $ по $ A $ и $ B $. Возможно это даст какие-то дополнительные условия на $ C $, но особого смысла в этом не вижу.
- 
- \subsection{Задача 3}
- 
- Выпишем суммарное вознаграждение процесса востановления. Для начала обозначим пару вспомогательных индикаторов. $ \tau $ -- индикатор того, что ремонт возможно произвести самостоятельно. $ \rho $ -- индикатор того, что самостоятельный ремонт был некачественным. \
- 
- \[\tau = \begin{cases}
- 1,  p\\
- 0, 1-p
- \end{cases}  \]
- 
-  \[\rho = \begin{cases}
- 1,  q\\
- 0, 1-q
- \end{cases}  \]
- 
- \[ R_i = \tau \rho (m + \eta) + \tau (1-\rho)m + (1 - \tau) \eta \]
- 
+В таком случае владельцу будет выгодно экономить, если средяя "чистая прибыль" от экономии будет больше, чем от экономии, то есть:
+
+\[ A - B - \frac{Y(t)}{t} > -A \]
+
+\[ A - B - \frac{p C}{90} > -A \]
+
+В таком случае владельцу будет выгодна первая стратегия даже если чистая прибыль от экономии будет отрицательной из-за штрафов, но будет больше чем $ -A $, то экономия всё равно останется оптимальной. Преобразуя неравенство, получим:
+
+\[  2A - B - \frac{pC}{90} > 0 \Rightarrow \frac{90(2A-B)}{C(\frac{A}{B})} > p\]
+
+Если честно, я не понял, как использовать зависимость $ С $ от дроби. Разве что наложить дополнительные условия на производную $ C $ по $ A $ и $ B $. Возможно это даст какие-то дополнительные условия на $ C $, но особого смысла в этом не вижу.
+
+\subsection{Задача 3}
+
+Выпишем суммарное вознаграждение процесса востановления. Для начала обозначим пару вспомогательных индикаторов. $ \tau $ -- индикатор того, что ремонт возможно произвести самостоятельно. $ \rho $ -- индикатор того, что самостоятельный ремонт был некачественным. \
+
+\[\tau = \begin{cases}
+1,  p\\
+0, 1-p
+\end{cases}  \]
+
+\[\rho = \begin{cases}
+1,  q\\
+0, 1-q
+\end{cases}  \]
+
+\[ R_i = \tau \rho (m + \eta) + \tau (1-\rho)m + (1 - \tau) \eta \]
+
 
 \subsubsection{i}
 
@@ -621,7 +656,7 @@ q + \frac{2m}{M + m} < \frac{1 - p}{p}
 	\label{police}
 \end{figure}
 
-Как и в лекции, будем пользоваться теоремой о двух милиционерах. Это до ужаса скучно, но так и быть. Поправка к графикам, которые у меня уже нет сил перерисовывать: по оси ординат, конечно же, $ \xi_1, \xi_2 ... $? а не $ S_1, S_2 ... $
+Как и в лекции, будем пользоваться теоремой о двух милиционерах. Это до ужаса скучно, но так и быть. Поправка к графикам, которые у меня уже нет сил перерисовывать: по оси ординат, конечно же, $ \xi_1, \xi_2 ... $, а не $ S_1, S_2 ... $
 
 \subsubsection{i}
 
@@ -796,8 +831,8 @@ F_{S_n}(x) = \int_{0}^{t} \frac{\beta^{n\alpha}}{\Gamma(n\alpha)} x^{n\alpha-1} 
 
 \begin{equation}
 \begin{aligned}
- P\{N_t = n\} = \int_{0}^{t} \frac{\beta^{n\alpha}}{\Gamma(n\alpha)} x^{n\alpha-1} e^{-\beta x} dx - \int_{0}^{t} & \frac{\beta^{(n+1)\alpha}}{\Gamma((n+1)\alpha)} x^{(n+1)\alpha-1} e^{-\beta x} dx = \\
- \int_{0}^{t} \beta^{n\alpha} x^{n\alpha-1} e^{-\beta x} (\frac{1}{\Gamma(N\alpha)} - \frac{\beta^\alpha}{\Gamma((n+1)\alpha)}x^\alpha) 
+P\{N_t = n\} = \int_{0}^{t} \frac{\beta^{n\alpha}}{\Gamma(n\alpha)} x^{n\alpha-1} e^{-\beta x} dx - \int_{0}^{t} & \frac{\beta^{(n+1)\alpha}}{\Gamma((n+1)\alpha)} x^{(n+1)\alpha-1} e^{-\beta x} dx = \\
+\int_{0}^{t} \beta^{n\alpha} x^{n\alpha-1} e^{-\beta x} (\frac{1}{\Gamma(N\alpha)} - \frac{\beta^\alpha}{\Gamma((n+1)\alpha)}x^\alpha) 
 \end{aligned}
 \end{equation}
 
@@ -843,7 +878,7 @@ P\{ \xi_1 + \xi_2 < \gamma \} = \iint_{x_1 < x_2} \lambda_1^2 x_1 e^{-\lambda_1x
 
 \begin{equation}
 \begin{aligned}
- P\{ N_{30} \le 3 | N_{10} \ge 2 \}  = P\{ N_{30} \le 3 | N_{10} = 2 \} P\{ N_{10} = 2 | N_{10} \ge 2 \} + & \\ P\{ N_{30} \le 3 | N_{10} = 3 \} P\{ N_{10} = 3 | N_{10} \ge 2 \} + P\{ N_{30} \le 3 | N_{10} \ge 4 \} P\{ N_{10} \ge 4 | N_{10} \ge 2 \} = & \\(P\{ N_{30} - N_{10} = 0 \} + P\{ N_{30} - N_{10} = 1 \}) P\{ N_{10} = 2 | N_{10} \ge 2 \} + P\{ N_{30} - N_{10} = 0 \} P\{ N_{10} = 3 | N_{10} \ge 2 \}
+P\{ N_{30} \le 3 | N_{10} \ge 2 \}  = P\{ N_{30} \le 3 | N_{10} = 2 \} P\{ N_{10} = 2 | N_{10} \ge 2 \} + & \\ P\{ N_{30} \le 3 | N_{10} = 3 \} P\{ N_{10} = 3 | N_{10} \ge 2 \} + P\{ N_{30} \le 3 | N_{10} \ge 4 \} P\{ N_{10} \ge 4 | N_{10} \ge 2 \} = & \\(P\{ N_{30} - N_{10} = 0 \} + P\{ N_{30} - N_{10} = 1 \}) P\{ N_{10} = 2 | N_{10} \ge 2 \} + P\{ N_{30} - N_{10} = 0 \} P\{ N_{10} = 3 | N_{10} \ge 2 \}
 \end{aligned}
 \end{equation}
 
@@ -900,11 +935,11 @@ P\{ N_{30} \le 3 | N_{10} \ge 2 \}  = (0.018 + 0.073) \cdot 0.465 + 0.018 \cdot 
 \[ \E(e^{iu(2\xi - \I\{ \xi > \frac{1}{2} \})}) \]
 
 Определим распределение величины  $ 2\xi - \I\{ \xi > \frac{1}{2} \}
- $, разложив её по формуле полной вероятности и использовав формулу полной вероятности.
- 
+$, разложив её по формуле полной вероятности и использовав формулу полной вероятности.
+
 \begin{equation}
 \begin{aligned}
- \P\{  2\xi - \I\{ \xi > \frac{1}{2}\}  \le x \} = \P\{ 2\xi \le x | \xi \le \frac{1}{2} \}\P\{  \xi \le \frac{1}{2} \}+ \P\{ 2\xi - 1  \le x |  \xi > \frac{1}{2} \} \P\{  \I\{ \xi > \frac{1}{2} \} = \\ \frac{\P\{ 2\xi \le x \cap \xi \le \frac{1}{2} \}}{\P \{ \xi \le \frac{1}{2} \}} \P\{  \xi \le \frac{1}{2} \} +\frac{\P\{ 2\xi - 1 \le x \cap \xi > \frac{1}{2} \}}{\P \{ \xi > \frac{1}{2} \}} \P\{  \xi > \frac{1}{2} \} =\\ \P\{ 2\xi \le x \cap \xi \le \frac{1}{2} \} + \P\{ 2\xi - 1 \le x \cap \xi > \frac{1}{2} \} = \F_\xi(min(\frac{x}{2}, \frac{1}{2})) + \F_\xi(\frac{x + 1}{2}) - \F_\xi(\frac{1}{2}) = \F_\xi(\frac{x}{2}) + \F_\xi(\frac{x}{2}) =\\ \frac{x}{2} + \frac{x}{2} = x \text{ при } x\in[0;1]
+\P\{  2\xi - \I\{ \xi > \frac{1}{2}\}  \le x \} = \P\{ 2\xi \le x | \xi \le \frac{1}{2} \}\P\{  \xi \le \frac{1}{2} \}+ \P\{ 2\xi - 1  \le x |  \xi > \frac{1}{2} \} \P\{  \I\{ \xi > \frac{1}{2} \} = \\ \frac{\P\{ 2\xi \le x \cap \xi \le \frac{1}{2} \}}{\P \{ \xi \le \frac{1}{2} \}} \P\{  \xi \le \frac{1}{2} \} +\frac{\P\{ 2\xi - 1 \le x \cap \xi > \frac{1}{2} \}}{\P \{ \xi > \frac{1}{2} \}} \P\{  \xi > \frac{1}{2} \} =\\ \P\{ 2\xi \le x \cap \xi \le \frac{1}{2} \} + \P\{ 2\xi - 1 \le x \cap \xi > \frac{1}{2} \} = \F_\xi(min(\frac{x}{2}, \frac{1}{2})) + \F_\xi(\frac{x + 1}{2}) - \F_\xi(\frac{1}{2}) = \F_\xi(\frac{x}{2}) + \F_\xi(\frac{x}{2}) =\\ \frac{x}{2} + \frac{x}{2} = x \text{ при } x\in[0;1]
 \end{aligned}
 \end{equation}
 
@@ -938,7 +973,7 @@ $\eta_{3}=\left\{\begin{array}{ll}{-1,} & {0 \leq \xi<1 / 3} \\ {0,} & {1 / 3 \l
 
 \begin{equation}
 \begin{aligned}
- \E e^{iu\eta_3}  = \frac{1}{3} (e^{-iu}  + 1 + e^{iu}) =\frac{1}{3}(\cos (-u)+i \sin (-u)+1+\cos u+i \sin u)=\\ \frac{1}{3}(\cos u-i \sin u+1+\cos u+i \sin u)=\frac{1}{3}(1+2 \cos u)
+\E e^{iu\eta_3}  = \frac{1}{3} (e^{-iu}  + 1 + e^{iu}) =\frac{1}{3}(\cos (-u)+i \sin (-u)+1+\cos u+i \sin u)=\\ \frac{1}{3}(\cos u-i \sin u+1+\cos u+i \sin u)=\frac{1}{3}(1+2 \cos u)
 \end{aligned}
 \end{equation}
 
@@ -991,11 +1026,11 @@ $$ F_{S_{101} - S_{100}|S_{100} = 224}(t) = P(S_{101} - S_{100} \le t|S_{100} = 
 
 $$  F_{S_{101} - S_{100}|S_{100} = 224}(t) = P(N_{224+t} - N_{224} \ge 50) = 1 - \sum_{k=0}^{49} \frac{(10(224+t) - 10(224))^k}{k!} e^{-(10(224+t) - 10(224))} =$$
 
- $$ 1 - \sum_{k=0}^{49} \frac{(10t)^k}{k!} e^{-(10t)}$$
- 
- Неоднородный случай:
- 
- $$  F_{S_{101} - S_{100}|S_{100} = 224}(t) = P(N_{224+t} - N_{224} \ge 50) = 1 - \sum_{k=0}^{49} \frac{(10(224+t)^{\frac{5}{4}} - 10(224)^{\frac{5}{4}})^k}{k!} e^{-(10(224+t)^{\frac{5}{4}} - 10(224)^{\frac{5}{4}})} $$
+$$ 1 - \sum_{k=0}^{49} \frac{(10t)^k}{k!} e^{-(10t)}$$
+
+Неоднородный случай:
+
+$$  F_{S_{101} - S_{100}|S_{100} = 224}(t) = P(N_{224+t} - N_{224} \ge 50) = 1 - \sum_{k=0}^{49} \frac{(10(224+t)^{\frac{5}{4}} - 10(224)^{\frac{5}{4}})^k}{k!} e^{-(10(224+t)^{\frac{5}{4}} - 10(224)^{\frac{5}{4}})} $$
 
 
 \subsection{Задача 4}
@@ -1013,11 +1048,11 @@ $f_{\xi_1}(t) = \lambda(t) e^{-\Lambda(t)}$
 По индукции:
 \begin{enumerate}[\Sun]
 	\item $n=1: f_{S_1}(t) = f_{\xi_1}(t) = e^{-\Lambda(t)} \frac{(\Lambda(t))^{1-1}}{(1-1)!} \lambda(t) = \lambda(t) e^{-\Lambda(t)}$ 
-
+	
 	
 	\item Шаг индукции.
 	
-	 $\mathbb{P}(N_t = n) = \mathbb{P}(S_n \le t) - \mathbb{P}(S_{n+1} \le t) \Rightarrow F_{S_{n+1}}(t) = \mathbb{P}(S_{n+1} \le t) = \mathbb{P}(S_n \le t) - \mathbb{P}(N_t = n) = F_{S_n}(t) - e^{-\Lambda (t)} \frac{(\Lambda (t))^n}{n!}$
+	$\mathbb{P}(N_t = n) = \mathbb{P}(S_n \le t) - \mathbb{P}(S_{n+1} \le t) \Rightarrow F_{S_{n+1}}(t) = \mathbb{P}(S_{n+1} \le t) = \mathbb{P}(S_n \le t) - \mathbb{P}(N_t = n) = F_{S_n}(t) - e^{-\Lambda (t)} \frac{(\Lambda (t))^n}{n!}$
 	$$f_{S_{n+1}}(t) = f_{S_n}(t) - \left(-\lambda(t) \cdot e^{-\Lambda(t)}  \frac{(\Lambda (t))^n}{n!} + e^{-\Lambda(t)} \frac{n(\Lambda(t))^{n-1} \cdot \lambda(t)}{n!}\right) =$$
 	$$= e^{-\Lambda(t)} \frac{(\Lambda(t))^{n-1}}{(n-1)!} \lambda(t) + \lambda(t) \cdot e^{-\Lambda(t)}  \frac{(\Lambda (t))^n}{n!} - e^{-\Lambda(t)} \frac{n(\Lambda(t))^{n-1} \cdot \lambda(t)}{n!} =$$
 	$$= \frac{n e^{-\Lambda(t)} (\Lambda(t))^{n-1} \lambda(t)}{n!} + \frac{e^{-\Lambda(t)} (\Lambda (t))^n \lambda(t)}{n!} - \frac{n e^{-\Lambda(t)} (\Lambda(t))^{n-1} \cdot \lambda(t)}{n!} = e^{-\Lambda(t)} \frac{(\Lambda (t))^n}{n!} \lambda(t)$$
@@ -1028,12 +1063,12 @@ $$\mathbb{P}(\xi_{k+1} \le t | S_k = s) = \mathbb{P}(N_{s+t} - N_s \ge 1) = 1 - 
 
 
 \subsubsection{iii}
- $$F_{\xi_k}(t) = \mathbb{P}(\xi_K \le t) = \int\limits_0^{+\infty} \mathbb{P}(\xi_k \le t | S_{k-1} = s) \cdot f_{S_{k-1}}(s) ds = \int\limits_0^{+\infty} (1 - e^{-\Lambda(t+s) + \Lambda(s)}) \cdot e^{-\Lambda(s)} \frac{(\Lambda (s))^{k-2}}{(k-2)!} \lambda(s) ds = $$
+$$F_{\xi_k}(t) = \mathbb{P}(\xi_K \le t) = \int\limits_0^{+\infty} \mathbb{P}(\xi_k \le t | S_{k-1} = s) \cdot f_{S_{k-1}}(s) ds = \int\limits_0^{+\infty} (1 - e^{-\Lambda(t+s) + \Lambda(s)}) \cdot e^{-\Lambda(s)} \frac{(\Lambda (s))^{k-2}}{(k-2)!} \lambda(s) ds = $$
 $$= \int\limits_0^{+\infty} e^{-\Lambda(s)} \frac{(\Lambda (s))^{k-2}}{(k-2)!} \lambda(s) - e^{-\Lambda(t+s) + \Lambda(s)} \cdot e^{-\Lambda(s)} \frac{(\Lambda (s))^{k-2}}{(k-2)!} \lambda(s) ds = \int\limits_0^{+\infty} f_{S_{k-1}}(s) - e^{-\Lambda(t+s)} \cdot \frac{(\Lambda (s))^{k-2}}{(k-2)!} \lambda(s) ds =$$
 $$= 1 - \int\limits_0^{+\infty} e^{-\Lambda(t+s)} \cdot \frac{(\Lambda (s))^{k-2}}{(k-2)!} \lambda(s) ds $$
 
 \section{Домашнее задание 5}
-
+\subsection{Задача 1}
 Для начала выпишем заготовку ответа.
 
 \[ P\{ X_n = j | X_{n-1} = i_{n-1} \} = 
@@ -1067,10 +1102,10 @@ P\{ D_{n-1} = i_{n-1} - j \} \text{ если } i_{n-1} \ge s, i_{n-1} \ge j\\
 
 \begin{figure}[!h]
 	\begin{center}
-	\includegraphics[width=0.6\linewidth]{51}
-	\caption{Графическое представление Марковской цепи}
-	\label{graph}
-\end{center}
+		\includegraphics[width=0.6\linewidth]{51}
+		\caption{Графическое представление Марковской цепи}
+		\label{graph}
+	\end{center}
 \end{figure}
 
 
@@ -1085,19 +1120,19 @@ P\{ D_{n-1} = i_{n-1} - j \} \text{ если } i_{n-1} \ge s, i_{n-1} \ge j\\
 
 \begin{table}[]
 	\begin{center}
-	\begin{tabular}{|c|c|c|}
-		\hline
-		\rowcolor[HTML]{9AFF99} 
-		\textbf{Вершина} & \textbf{Существенность} & \textbf{Период} \\ \hline
-		1                & Существенна             & 1               \\ \hline
-		2                & Существенна             & 1               \\ \hline
-		3                & Несущественна           & 1               \\ \hline
-		4                & Существенна             & 2               \\ \hline
-		5                & Существенна             & 2               \\ \hline
-		6                & Существенна             & 1               \\ \hline
-		7                & Существенна             & 1               \\ \hline
-	\end{tabular}
-\end{center}
+		\begin{tabular}{|c|c|c|}
+			\hline
+			\rowcolor[HTML]{9AFF99} 
+			\textbf{Вершина} & \textbf{Существенность} & \textbf{Период} \\ \hline
+			1                & Существенна             & 1               \\ \hline
+			2                & Существенна             & 1               \\ \hline
+			3                & Несущественна           & 1               \\ \hline
+			4                & Существенна             & 2               \\ \hline
+			5                & Существенна             & 2               \\ \hline
+			6                & Существенна             & 1               \\ \hline
+			7                & Существенна             & 1               \\ \hline
+		\end{tabular}
+	\end{center}
 \end{table}
 
 
@@ -1128,14 +1163,14 @@ P=\left(\begin{array}{ccccccc}{0} & {1 / 2} & {0} & {0} & {0} & {0} & {1 / 2} \\
 \frac{1}{3}\pi_2 + \frac{1}{3}\pi_7 = \pi_6\\
 \frac{1}{2}\pi_1 + \frac{1}{3}\pi_2 + \frac{1}{2}\pi_6 = \pi_7\\
 \pi_1 + \pi_2 + \pi_3 + \pi_4 + \pi_5 + \pi_6 + \pi_7 = 1
- \end{cases} \Rightarrow \begin{cases}
- \pi_1 = \pi_6\\
- \pi_2 = \pi_7\\
- \pi_3 = 0\\
- \pi_4 = \pi_5\\
- \pi_6 = \frac{2}{3}\pi_7\\
- \pi_7 = (1-2\pi_5)\frac{3}{10}
- \end{cases}\]
+\end{cases} \Rightarrow \begin{cases}
+\pi_1 = \pi_6\\
+\pi_2 = \pi_7\\
+\pi_3 = 0\\
+\pi_4 = \pi_5\\
+\pi_6 = \frac{2}{3}\pi_7\\
+\pi_7 = (1-2\pi_5)\frac{3}{10}
+\end{cases}\]
 
 
 
@@ -1216,5 +1251,732 @@ C = -\frac{8}{7}
 \end{pmatrix} \]
 
 Следовательно, вероятность того, что выиграв первый матч, Крылья Советов победят вероятностью 0.667. Что-то меня терзают сомнения, что задача такая лёгкая.
+
+\subsection{Задача 5}
+
+Вриведём контрпример, показывающий, что данная цепь не является Марковской.
+
+Пусть $ \xi_n = \begin{cases}
+0, p\\
+1, 1-p
+\end{cases} $
+
+Найдём следующую вероятность:
+
+\[ \P\{ \xi_n + \xi_{n+1} = 2 | \xi_{n-1} + \xi_n = 1 , \xi_{n-1} + \xi_{n-2} = 0 \} = \frac{\P\{ \xi_n + \xi_{n+1} = 2 \cap \xi_{n-1} + \xi_n = 1 \cap \xi_{n-1} + \xi_{n-2} = 0 \}}{\P \{ \xi_{n-1} + \xi_n = 1 \cap \xi_{n-1} + \xi_{n-2} = 0 \}} = \]
+
+Очевидно, что в существует только один набор пересекающихся событий, описывающих числитель и знаменатель и что переход эквивалентен
+
+\[ = \frac{\P \{ \xi_{n+1} = 1 \cap \xi_n = 1 \cap \xi_{n-1} = 0 \cap \xi_{n-2} = 0 \}}{\P \{  \xi_n = 1 \cap \xi_{n-1} = 0 \cap \xi_{n-2} = 0 \} }  = \text{ независимость } \xi_n = \P\{ \xi_{n+1} = 1 \} = p\]
+
+Теперь уберём из условия последний шаг и посмотрим, что получится.
+
+\[ \P\{ \xi_n + \xi_{n+1} = 2 | \xi_{n-1} + \xi_n = 1 \} = \frac{\P\{ \xi_n + \xi_{n+1} = 2 \cap \xi_{n-1} + \xi_n = 1 \}}{\P \{ \xi_{n-1} + \xi_n = 1 \} } = \]
+
+\[
+\frac{\P \{ \xi_{n+1} = 1 \cap \xi_n = 1 \cap \xi_{n-1} = 0 \}}{\P\{\xi_n = 1 \cap \xi_{n-1} = 0 \} + \P\{\xi_n = 0 \cap \xi_{n-1} = 1 \}} = \frac{p^2(1-p)}{2p(1-p)} = \frac{p}{2}\]
+
+Следоваетльно, предыстория дальше первого шага влияет на вероятность и данная цепь не является цепью Маркова.
+
+\subsection{Задача 6}
+
+\[
+P=\left(\begin{array}{ccccc}{p_{1}} & {p_{2}} & {p_{3}} & {\dots} & {p_{n}} \\ {p_{n}} & {p_{1}} & {p_{2}} & {\dots} & {p_{n-1}} \\ {\dots} & {\dots} & {\dots} & {\dots} & {\dots} \\ {p_{2}} & {p_{3}} & {p_{4}} & {\dots} & {p_{1}}\end{array}\right)
+\]
+
+Сразу заметим, что матрица P описывает эргодическую цепь Маркова, так как $p_{i} \in(0,1), \forall i=1 . . n, \mathrm{и} \sum_{i=1}^{n} p_{i}=1$. Очевидно, что в каждой вершине есть цикл и, следственно, период всех вершин $ = 1 $. Так как каждая вершина сообщается с каждой, следственно, можно из каждой точки попасть в каждую и вернуться обратно. Из этого напрямую следует, что весь граф представляет собой один класс эквивалентности, в котором все вершины существенны. 
+
+Далее, проверим, что $ \pi_{1\times n}^T = (\frac{1}{n}, ... , \frac{1}{n}) $ является стационарным распределением. Очевидно, что $ (\frac{1}{n}, ... , \frac{1}{n}) P_j = \frac{1}{n} \sum_{1}^{n} p_{i} = \frac{1}{n} $. Следовательно,  $ \pi_{1\times n}^T P =  \pi_{1\times n}^T $ и  $ \pi_{1\times n}^T $ является стационарным распределением. Так как цепь маркова эргодическая, то это распределение будет единственным и, следовательно, по теореме с семинара:
+
+\[
+\lim _{n \rightarrow \infty} \mathbb{P}\left\{X_{n}=k\right\}=\frac{1}{n}, \quad \forall k=1 . . n
+\]
+
+
+\section{Домашнее задание 6}
+
+\subsection{Задача 1}
+
+\subsection{i}
+Выпишем матрицу переходов:
+
+\[ \P = \begin{pmatrix} 
+0 & \frac{1}{4} & \frac{1}{4} & \frac{1}{4} & \frac{1}{4} & 0\\
+\frac{1}{4} & 0 & \frac{1}{4} & \frac{1}{4} & 0 & \frac{1}{4}\\
+\frac{1}{4} & \frac{1}{4} & 0 & 0 & \frac{1}{4} & \frac{1}{4}\\
+\frac{1}{4} & \frac{1}{4} & 0 & 0 & \frac{1}{4} & \frac{1}{4}\\
+\frac{1}{4} & 0 & \frac{1}{4} & \frac{1}{4} & 0 & \frac{1}{4}\\
+0 & \frac{1}{4} & \frac{1}{4} & \frac{1}{4} & \frac{1}{4} & 0\\
+\end{pmatrix} \]
+
+Искомое распределение - это шестая строка матрицы $ \P^2 $. Мысленно умножим шестую строку матрицы $ \P $ на каждый из столбцов и получим ответ:
+
+\[ p_{6j}^2 = \left(\frac{1}{4} \frac{1}{8} \frac{1}{8} \frac{1}{8} \frac{1}{8} \frac{1}{4} \right) \]
+
+\subsubsection{ii}
+
+Ответ очевиден, вероятности будут равные, $ \frac{1}{6} $. Очень лень техать систему и тем более решать. 
+
+\subsection{Задача 2}
+
+\subsubsection{i}
+
+Классы эквивалентности:
+
+\begin{enumerate}[\Sun]
+	\item (1) - существенное состояние, непериодическое
+	\item (2,3) - состояния несущественны, период: 2
+	\item (4) - несущественное состояние, непериодическое
+\end{enumerate}
+
+\subsection{ii}
+\[ 
+\begin{cases}
+\frac{1}{2}\pi_3 + \frac{1}{4} \pi_4 = \pi_2\\
+\frac{1}{2} \pi_2 + \frac{1 }{4} \pi_4 = \pi_3\\
+\frac{1}{4} \pi_4 =\pi_4\\
+\pi_1 + \pi_2 + \pi_3 + \pi_4 = 1
+
+\end{cases} \Rightarrow
+\begin{cases}
+\pi_1 = 1\\
+\pi_2 = 0\\
+\pi_3 = 0\\
+\pi_4 = 0
+\end{cases}
+\]
+
+Получаем единственное стационарное распределение. Ответ согласуется с логикой. Из любого состояния процесс когда-нибудь перейдёт в состояние 1 и не сможет из него выйти.
+
+\subsubsection{iii}
+
+Решим с помощью метода первого шага. Спасибо ББ, что мы это прошли ещё на 2 курсе.
+
+Пусть $ \mu  $ - матожидание количества шагов из 2, $ \eta  $ - ожидаемое количество шагов из 3.
+
+\[ \begin{cases}
+\mu = \frac{1}{2}(\eta + 1) + \frac{1}{2}\\
+\eta = \frac{1}{2} + \frac{1}{2}(\mu + 1)
+\end{cases} \Rightarrow 
+\mu = 2 \]
+
+
+\subsection{Задача 3}
+\subsubsection{i}
+
+\[ \begin{pmatrix} 
+1 & 0 & 0 & 0 &     \cdots & 0 & 0 & 0 \\
+1-p & 0 & p & 0 & \cdots & 0 & 0 & 0\\
+0 & 1-p & 0 & p & \cdots & 0 & 0 & 0\\
+\vdots & \vdots & \vdots & \ddots & \vdots & \vdots & \vdots & \vdots\\
+0 & 0 & 0 & 0 & \cdots & 1-p & 0 & p\\
+0 & 0 & 0 & 0 & \cdots & 0 & 0 & 1\\
+\end{pmatrix} \]
+
+\subsubsection{ii}
+Классы эквивалентности:
+
+\begin{enumerate}[\Sun]
+	\item (0) - существенное состояние, непериодическое
+	\item (1 - n-1) - несущественные состояния, период: 2
+	\item (n) - существенное состояние, непериодическое
+\end{enumerate}
+
+\subsubsection{iii}
+
+Решим систему $ 4 \times 4 $. Этого будет достаточно.
+
+\[ \begin{cases}
+(1-p)\pi_3 = \pi_2\\
+p\pi_2 = \pi_3\\
+p\pi_3 + \pi_4 = \pi_4\\
+\pi_1 + \pi_2 + \pi_3 + \pi_4 = 1\\
+\end{cases} \Rightarrow 
+\begin{cases}
+\pi_2 = 0\\
+\pi_3 = 0\\
+\pi_1 = 1 - \pi_4
+\end{cases} \]
+
+Следственно, стационарным распределением будет любое распределение вида $ [p, 0 \cdots, 0, (1-p)] $, где $ p \in [0,1] $
+
+\subsection{Задача 4}
+Найдём математическое ожидание через сумму условных математических ожиданий, взвешенных на вероятности старта из них. По аналогии с задачей 2, найдём условные математические ожидания при старте из каждой точки. При старте из точки 1 подразумевалось матожидание = 0.
+
+Решим систему по методу первого шага. $ \eta $ - матожидание при старте из точки 2, $ \kappa $ = матожидание при старте из точки 3:
+
+\[ \begin{cases}
+\eta = \frac{1}{3}(\eta + 1) + \frac{1}{3}(\kappa + 1) + \frac{1}{3}\\
+\kappa = \frac{1}{4}(\kappa + 1)+ \frac{1}{2}(\eta + 1) +\frac{1}{4} 
+\end{cases} \Rightarrow \begin{cases}
+\eta = \frac{13}{4}\\
+\kappa = \frac{14}{4}
+\end{cases} \]
+
+Взвесим на вероятности стартовых точек:
+
+\[ \mu = \frac{1}{3}\left( \frac{13}{4} + \frac{14}{4} + 0 \right)  = \frac{27}{12}\]
+
+
+
+\section{Домашнее задание 7}
+
+\subsection{Задача 1}
+
+$ X_t $ - гауссовский процесс
+
+ $ \E(X_t) = 0 $
+ 
+  $ Y_t = X_t\eta $
+  
+\[   \eta = \begin{cases}
+ 1, p\\
+ -1, (1-p)
+ \end{cases}  \]
+ 
+ \[ (Y_{t_1}, Y_{t_2} \cdots Y_{t_n}) = (X_{t_1}\eta, X_{е_2}\eta, \cdots X_{е_n}\eta) \]
+ 
+ \[ \gamma =(\lambda_1 X_{t_1}\eta + \lambda_2 X_{е_2}\eta + \cdots + \lambda_n X_{е_n}\eta) = \eta \underbrace{ \sum_{i = 1}^{n}\lambda_i X_{t_i} }_{\xi} \]
+ 
+ Очевидно, что $ \xi $ - нормальная величина. Пусть её функция распределения обозначается как $ \Phi(x) $
+ 
+ \[ \P\{\gamma \le x\} = \P\{\gamma \le x | \eta = 1\} \P\{\eta = 1\} +  \P\{\gamma \le x | \eta = -1\} \P\{\eta = -1\} = \P\{ \xi \le x \}p + \P\{ -\xi \le x \}(1-p) = \] 
+ 
+ \[ \P\{ \xi \le x \}p + \P\{ \xi \ge -x \}(1-p) =  \P\{ \xi \le x \}p + \P\{ xi \le  x \}(1-p)  = \Phi(x)(p + 1 - p) = \Phi(x)\]
+ 
+ Следовательно, $ \gamma \sim N \Rightarrow  (Y_{t_1}, Y_{t_2} \cdots Y_{t_n}) $ -- гауссовский вектор $ \Rightarrow Y_t $ -- гауссовский процесс 
+ 
+ 
+ \subsection{Задача 2}
+ 
+ \subsubsection{i}
+ 
+ $ K(t,s) = min(t,s) - ts $ - симметричная функция
+ 
+ Проверим положительную определённость.
+ 
+ Заметим, что 
+ 
+	$ min(t,s) = \int_{0}^{+\infty} f_t(x) f_s(x) dx  $ при   $ f_t(x) = \I\{ x \in [0,t] \} $
+	
+	В то же время $ ts = min(t,s)max(t,s)$
+	
+	Следовательно, $  K(t,s) = min(t,s)(1-max(t,s)) $
+	
+Также заметим, что $ (1-max(t,s)) = \int_{0}^{+\infty} g_t(y) g_s(y) dy $ при  $ g_t(x) = \I\{ x \in [t, 1] \} $
+
+Тогда:
+
+\[ \sum_{i,j}^{n} \lambda_i \lambda_j \int_{0}^{+\infty} f_{t_i}(x) f_{t_j}(x) dx \int_{0}^{+\infty} g_{t_i}(y) g_{t_j}(y) dy = \sum_{i,j}^{n} \lambda_i \lambda_j \iint_{0}^{+\infty} f_{t_i}(x) f_{t_j}(x)  g_{t_i}(y) g_{t_j}(y) dx dy  =  \]
+
+\[  \iint_{0}^{+\infty} \sum_{i,j}^{n} \lambda_i \lambda_j  f_{t_i}(x) f_{t_j}(x)  g_{t_i}(y) g_{t_j}(y) dx dy =  \iint_{0}^{+\infty} \left(\sum_{i = 1}^{n} \lambda_i  f_{t_i}(x)   g_{t_i}(y) \right)^2 dx dy \ge 0 \]
+
+Следовательно, случайный процесс существует
+
+ \subsubsection{ii}
+ \[ K(s,t) = min(s,t) - s(t+1) = min(t,s) - s(t+1) \neq min(t,s) - t(s+1)  = k(t,s) \]
+ Функция несимметрична, следовательно процесс не существует
+  \subsubsection{iii}
+  
+  \[ K(s,t) = min(s,t) + cos(s-t) = min(t,s) + cos(t(t-s)) = min(t,s) + cos(t-s) = K(t,s) \]
+  
+  \[ \sum_{i,j}^{n} \lambda_i\lambda_j (min(t_i, t_j) + cos(t-s)) = \sum_{i,j}^{n} \lambda_i\lambda_j min(t_i, t_j) + \sum_{i,j}^{n} \lambda_i\lambda_j cos(t-s) = I + II  \ge 0 \Rightarrow \] процесс существует
+  
+\[   f_t(x) = \I\{ x \in [0,t] \} \]
+  \[ I =  \sum_{i,j}^{n} \lambda_i\lambda_j \int_{0}^{+\infty} f_i(x)f_j(x)dx =  \int_{0}^{+\infty} \sum_{i= 1}^{n} \lambda_i f_i(x) \sum_{j = 1}^{n} \lambda_j f_j(x) dx = \int_{0}^{+\infty} (\sum_{i = 1}^{n} \lambda_i f_i(x))^2 dx  \ge 0 \]
+
+\[ II = \sum_{i,j}^{n} \lambda_i \lambda_j cos(t_i - t_j)  =  \sum_{i,j}^{n} \lambda_i \lambda_j (\cos t_i \cos t_j + \sin t_i sin t_j) = \sum_{i,j}^{n} \lambda_i \lambda_j \cos t_i \cos t_j + \sum_{i,j}^{n} \lambda_i \lambda_j  \sin t_i sin t_j = \]
+
+\[ (\sum_{i = 1}^{n} \cos t_i)^2 +  (\sum_{i = 1}^{n} \sin t_i)^2 \ge 0 \]
+
+
+\subsection{Задача 3}
+
+\subsubsection{i}
+$ Z_2 \sim N? $
+
+\[ \P\{ Z_2 \le x \} = \P\{ Z_2 \le x | \xi > 0 \} \underbrace{\P\{ \xi > 0 \}}_{\frac{1}{2}} +  \P\{ Z_2 \le x | \xi < 0 \}\underbrace{ \P\{ \xi < 0 \} }_{\frac{1}{2}}+  \P\{ Z_2 \le x | \xi = 0 \} \underbrace{\P\{ \xi = 0 \}}_0 = \]
+
+\[ \frac{1}{2} (\P\{ |\eta| \le x \} + \P\{ -|\eta| \le x \}) \star \]
+
+$ F_{\xi}(x) = \Phi(x) $
+
+Далее, пристально вглядываясь в график плотности нормального распределения, можно рассмотреть отдельно 2 случая:
+
+
+При  $ x > 0  $:
+
+
+
+\[ \star = \frac{1}{2}(\P\{ |\eta| \le x \} + 1) =  \frac{1}{2}(\Phi(x) - \Phi(-x) + 1) = \frac{1}{2}(2\Phi(x) - 1 + 1) = \Phi(x)\]
+
+
+При $ x < 0 $:
+
+\[ \frac{1}{2} (\underbrace{\P\{ |\eta| \le x \} }_0+ \P\{ |\eta| \ge -x \}) = \frac{1}{2}(2 \Phi(x)) = \Phi(x)\]
+
+
+
+
+\subsubsection{ii}
+
+$ cov(\xi, |\eta| sign(\xi)) $
+
+$ \E(\xi) = 0, \E(|\eta| sign(\xi)) $
+
+\[ \E(\xi |\eta| sign(\xi)) = \E(\xi sign(\xi)) \E(|\eta|) = \frac{2}{\pi}\]
+
+\[ \E(|\eta|) = \int_{-\infty}^{+\infty} |x| \frac{1}{\sqrt{2\pi}} e^{-\frac{x^2}{2}} dx =  \frac{2}{\sqrt{2\pi}} \int_{0}^{+\infty} |x| e^{-\frac{x^2}{2}} dx =  \frac{2}{\sqrt{2\pi}}  \left( -e^{-\frac{x^2}{2}} \right) \Biggr|_0^{+\infty} = \frac{2}{\sqrt{2\pi}} = \sqrt{\frac{2}{\pi}}\]
+
+
+$ xsingn(x)  $ -- борелевская функция. так что можно считать матожидание по определению
+
+ \[ \E(\xi sign(\xi)) =\int_{-\infty}^{\infty}  x sign(x) \frac{1}{\sqrt{2\pi}} e^{-\frac{x^2}{2}} dx  =  \frac{1}{\sqrt{2\pi}} \left( \underbrace{ \int_{-\infty}^{0} -x e^{-\frac{x^2}{2}} dx }_I + \underbrace{ \int_{0}^{+\infty} x e^{-\frac{x^2}{2}} dx }_{II}  \right) = \frac{2}{\sqrt{2\pi}} = \sqrt{\frac{2}{\pi}} \]
+
+
+\[ I = e^{-\frac{x^2}{2}}\Biggr|_{-\infty}^{0}   = 1 \]
+
+\[ II = -e^{-\frac{x^2}{2}}\Biggr|_0^{+\infty} = 1  \]
+
+
+
+\subsubsection{iii}
+
+ОЛЯ,СПОЙЛЕР
+
+Этот пункт можно не читать, он неверный, но понял я это только в конце. Можешь просто прочесть последнюю строчку и посмеяться.
+
+Докажем от противного. Пусть вектор $ \vec{Z} $ - гауссовский. Тогда  должно быть верно, что$  \vec{Z} = \Sigma^{\frac{1}{2}} \vec{Z}^0 + \vec{\mu} $, где  $ \vec{Z}^0 $  - вектор стандартных нормальных случайных величин.
+
+Как мы знаем из предыдущего пункта:
+
+\[ \Sigma = \begin{pmatrix}
+1 & \frac{2}{\pi}\\
+ \frac{2}{\pi} & 1
+\end{pmatrix} \]
+
+Разложим по спекртальной теореме эту матрицу, чтобы возвести её в степень $ \frac{1}{2} $. Тут я предлагаю поверить мне на слово, что она раскладывается следующим образом, подробно не вижу смысла описывать. 
+\[ 
+ \Sigma^{\frac{1}{2}} = \frac{1}{2}\begin{pmatrix}
+	1 & 1\\
+	-1 & 1
+\end{pmatrix} 
+\begin{pmatrix}
+\sqrt{\frac{\pi - 2}{\pi}} & 0\\
+0 & \sqrt{\frac{\pi + 2}{\pi}}
+\end{pmatrix}
+\begin{pmatrix}
+1 & -1\\
+1 & 1
+\end{pmatrix} 
+ \]
+
+Тогда:
+
+\[ \begin{pmatrix}
+Z_1\\
+Z_2
+\end{pmatrix} = \frac{1}{2}\begin{pmatrix}
+1 & 1\\
+-1 & 1
+\end{pmatrix} 
+\begin{pmatrix}
+\sqrt{\frac{\pi - 2}{\pi}} & 0\\
+0 & \sqrt{\frac{\pi + 2}{\pi}}
+\end{pmatrix}
+\begin{pmatrix}
+1 & -1\\
+1 & 1
+\end{pmatrix}  \begin{pmatrix}
+Z_1^0\\
+Z_2^0
+\end{pmatrix} +    \begin{pmatrix}
+0\\
+0
+\end{pmatrix} \]
+
+
+Перемножив первые три матрицы:
+
+\[ \begin{pmatrix}
+Z_1\\
+Z_2
+\end{pmatrix} = \frac{1}{2} \begin{pmatrix}
+\alpha & \beta\\
+\beta & \alpha
+\end{pmatrix} 
+ \begin{pmatrix}
+Z_1^0\\
+Z_2^0
+\end{pmatrix}\]
+
+где $  \alpha =  \sqrt{\frac{\pi + 2}{\pi}} + \sqrt{\frac{\pi - 2}{\pi}}, \beta =  \sqrt{\frac{\pi + 2}{\pi}} - \sqrt{\frac{\pi - 2}{\pi}}  $
+
+По исходным данным, $ Z_1, Z_2 $ - стандартные нормальные величины. Что же $ Z_1^0, Z_2^0 $ 
+
+Давайте выразим их из системы уравнений. Опять же, я пропущу никому не нужное решение. Подставив ответ в исходную систему, легко проверить его.
+
+\[ Z_1^0 = \frac{2(\alpha Z_1 - \beta Z_2)}{\alpha^2 - \beta^2} \]
+
+\[ Z_2^0 = \frac{2(\alpha Z_2 - \beta Z_1)}{\alpha^2 - \beta^2} \]
+
+Сейчас осознал, что мог просто обратить матрицу и не городить в тетради страницу вычислений, но да какая теперь разница.
+
+Итак, теперь посчитаем дисперсию любой из величин. Допустим, $ Z_1 $:
+
+\[ \Var(Z_1^0) = \frac{4}{(\alpha^2 - \beta^2)^2} (\alpha^2 + \beta^2 - 2\alpha \beta \frac{2}{\pi})\]
+
+\[ \alpha^2 = 2 + \frac{2\sqrt{\pi^2 - 4}}{\pi},  \beta^2 = 2 - \frac{2\sqrt{\pi^2 - 4}}{\pi}  \]
+
+Нетрудно показать, что $ \alpha^2 + \beta^2 = 4 $ и $ \alpha \beta = \frac{4}{\pi} $
+
+И вот на этом моменте я на бумажке всё досчитал, и понял, что там будет единица. А значит, всё было зря. Ну и ладно.
+
+\begin{figure}[h]
+	\includegraphics{71}
+\end{figure}
+
+\subsection{Задача 4}
+
+\subsubsection{i}
+\[ Y_{n+1} = \alpha (\alpha Y_{n-1} + X_{n-1}) + X_n = \alpha^2 Y_{n-1} + \alpha X_{n-1} + X_n = \sum_{i = 0}^{n} \alpha^i X_{n-i}\]
+
+Рассмотрим вектор $  (Y_{t_1}, Y_{t_2} \cdots Y_{t_n})  $
+
+\[ (Y_{t_1}, Y_{t_2} \cdots Y_{t_n}) = \left( \sum_{i = 0}^{t_1 - 1} \alpha^i X_{t_1-i - 1},  \sum_{i = 0}^{t_2 - 1} \alpha^i X_{t_2-i - 1}, \cdots,  \sum_{i = 0}^{t_n - 1} \alpha^i X_{t_n-i - 1} \right) \]
+
+Очевидно, что линейные комбинации компонент этого вектора можно записать следующим образом:
+
+\[ \lambda_0 X_0 + \lambda_1 X_1 + \cdots + \lambda_{\max(t_1, \cdots, t_n)} X_{\max(t_1, \cdots, t_n)} \sim N \]
+
+как линейная комбинация стандартных нормальных величин
+
+Следовательно, $  (Y_{t_1}, Y_{t_2} \cdots Y_{t_n}) $ - гауссовский вектор $ \Rightarrow Y_t $  - гауссовский процесс
+
+
+\subsubsection{ii}
+
+\[ \cov(Y_t, Y_s) = \cov(\sum_{i = 0}^{t-1} \alpha^i X_{t-1-i}, \sum_{i = 0}^{s-1} \alpha^i X_{s-1-i})  = \text{ независимость и смена порядка суммирования } =
+\] 
+
+\[\sum_{i = 0}^{min(t-1, s-1)} \alpha^{t+s-2i-2} \Var(X_i) = \alpha^{t+s-2} \frac{1 - \alpha^{-2(min(t-1,s-1) + 1)}}{1 - \alpha^-2} = \alpha^{t+s} \frac{1 - \alpha^{-2min(t,s)}}{\alpha^2 - 1} \]
+
+
+\subsection{Задача 5}
+
+Вместо доказательства неотрицательной определённости функции докажем неотрицательную, а точнее положительную определённость матрицы $ M_{n}=\left(e^{-\left|t_{i}-t_{j}\right|}\right)_{i, j=1}^{n} $
+
+Для случая $ 3 \times 3 $ матрица выглядит следующим образом:
+
+\[ \begin{pmatrix} 
+1 & e^{-|t_1 - t_2|} & e^{-|t_1 - t_3|} \\
+e^{-|t_1 - t_2|} & 1 & e^{-|t_2 - t_3|}\\
+e^{-|t_1 - t_3|} & e^{-|t_2 - t_3|} & 1 
+\end{pmatrix}\]
+
+По критерию Сильвестра все главные миноры должны быть положительными. Докажем по индукции. 
+
+Базовый случай:
+
+\[ \triangle_1 = 1 > 0 \]
+
+Индукционный переход. Положим, что $ \triangle_{n-1} > 0 $Докажем то же самое для $ n $. Показывать будем всё на примере $ 3 \times 3 $ для простоты. Для подсчёта определителя матрицы $ n\times n $ видоизменим матрицу внутри определителя таким образом, чтобы сам определитель не изменился. 
+
+Во-первых, можно предположить $ t_1 < t_2 < \cdots < t_n $. Допустим, не выполняется только первое неравенство. Тогда, поменяв местами первую и вторую строки, а также первый и второй столбец, и переобозначив моменты времени, получим новую матрицу со старым определителем, у которого дважды сменился знак. В итоге определитель не изменился. Таким образом, преобразовав матрицу до выполнения временного условия, можно раскрыть все модули со знаком минус и получить примерно следующее:
+
+\[ \begin{pmatrix} 
+1 & e^{t_1 - t_2} & e^{t_1 - t_3} \\
+e^{t_1 - t_2} & 1 & e^{t_2 - t_3}\\
+e^{t_1 - t_3} & e^{t_2 - t_3} & 1 
+\end{pmatrix}\]
+
+Теперь каждую строку i домножим на $ e^{t_i} $, а каждый столбец j - поделим на $ e^{-t_j} $. Определитель матрицы снова не изменится, так как если мы вынесем множители из каждой строки (аналогично строкам можно выносить множители из столбцов, так как определитель матрицы равен определителю транспонированной матрицы), и все множители в итоге сократятся. Матрица будет выглядеть примерно следующим образом:
+
+\[ \begin{pmatrix} 
+1 & e^{2(t_1 - t_2)} & e^{2(t_1 - t_3)} \\
+1 & 1 & e^{2(t_2 - t_3)}\\
+1 & 1 & 1 
+\end{pmatrix}\]
+
+Далее вычтем вторую строку из третьей, что не изменит определителя.
+
+\[ \begin{pmatrix} 
+1 & e^{2(t_1 - t_2)} & e^{2(t_1 - t_3)} \\
+1 & 1 & e^{2(t_2 - t_3)}\\
+0 & 0 & 1 -  e^{2(t_2 - t_3)}
+\end{pmatrix}\]
+
+Очевидно, что последний элемент третьей строки при любой размерности будет положительным. Теперь раскладываем определитель полученной матрицы по последней строке и получаем:
+
+\[ \triangle_n = 1 - e^{2(t_{n-1} - t_{n})}  \triangle_{n-1} > 0 \]
+
+Следовательно, индукционный переход доказан и исходное утверждение о положительной определённости матрицы верно. Все её главные миноры положительны. Матрица положительно определена и, соответственно, функция положительно определена.
+
+\subsection{Задача 6}
+
+\subsubsection{i}
+
+Для доказательства этого утверждения воспользуемся несколькими результатами, известными для независимых величин. $ z $ - вектор-столбец. $ \xi $ - вектор i.i.d. стандартных нормальных случайных величин.
+
+Во-первых, для $ k $ независимых величин совместная плотность равна произведению отдельных плотностей:
+
+
+\[ f_{\mathbf{\xi}}(\mathbf{z})=\prod_{i=1}^{k} f_{\xi_{i}}\left(z_{i}\right)=\prod_{i=1}^{k} \frac{1}{\sqrt{2 \pi} \sigma_{i}} e^{-z_{i}^{2} / 2 \sigma_{i}^{2}}, \quad \sigma_{i}^{2}=\overline{z_{i}^{2}} \]
+
+
+Аналогично можно переписать в матричной форме:
+
+\[ f_{\mathrm{\xi}}(z)=\frac{1}{(2 \pi)^{k / 2}\left|\Lambda_{\xi}\right|^{1 / 2}} \exp \left(-\frac{1}{2} z^T \Lambda_{\xi}^{-1} z \right) \]
+
+$ \Lambda_{\xi} $ - диагональная матрица. Возведение в любую степень - поэлементное.$  |\Lambda_{\xi}| = \sigma_{1}^{2} \sigma_{2}^{2} \ldots \sigma_{k}^{2} $
+
+
+Пусть $ \Sigma^{-\frac{1}{2}} = A $ Так как исходный вектор гауссовский, его можно представить в виде 
+
+\[ \vec{X} = A \xi + \vec{\mu}_x = m(\vec{X})\]
+
+Это матричное преобразование обратимо, так как матрица $ \Sigma $ невырождена.
+
+\[ \xi = B(\vec{X} -  \vec{\mu}_x) = g(\vec{X}), B = A^{-1}\]
+
+Далее, как завещал нам матан, для получения функции от новых переменных, произведём в функции от независимых величин преобразование переменных ($ \xi $), не забыв домножить на определитель Якобиана замены.  Элла Львовна Хабина всегда говорила не забывать домножать на Якобиан замены. Грубо говоря, просто подставим, выразив новую плотность:
+
+\[ f_{\mathbf{\vec{X}}}(\boldsymbol{x})=f_{\mathbf{\xi}}(g(\boldsymbol{x}))\left|J_{\mathscr{G}}(\boldsymbol{x})\right|  \star \]
+
+По определению, элемент Якобиана:
+
+\[
+J_{i j}=\frac{\partial g_{i}(x)}{\partial \beta_{j}}
+\]
+
+Из определения функции $ g(x) $:
+
+\[  g(x) =  B(x -  \vec{\mu}_x)  = \begin{pmatrix}
+g_1(x)\\
+g_2(x)\\
+\vdots \\
+g_k(x)
+\end{pmatrix}\]
+
+Обозначив элемент матрицы B как $ b_{ij} $, можно записать элемент $ g_i $ следующим образом:
+
+
+
+\[
+g_{i}(\boldsymbol{x})=\sum_{j=1}^{k} b_{i j}\left(x_i-\vec{\mu}_{xi}\right)
+\]
+
+Получается, $ \left|J_{\mathscr{G}}(\boldsymbol{x})\right| = |B| $
+
+
+Подставляем всё в исходную формулу $ \star $:
+
+\[
+f_{\mathbf{\vec{X}}}(\boldsymbol{x})-\frac{1}{(2 \pi)^{k / 2}}\left(\frac{|B|^{2}}{\left|\Lambda_{\xi}\right|}\right)^{1 / 2} \exp \left[-\frac{1}{2}\left(x-\vec{\mu}_{xi}\right)^T B^T \Lambda_{\xi}^{-1} B\left(x-\vec{\mu}_{xi} \right)\right]
+\]
+
+\[
+\Lambda_{\vec{X}} = \mathbf{E}\left[\left(\mathbf{\vec{X}}-\mathbf{m}_{x} \right)\left(\mathbf{\vec{X}}-\mathbf{m}_{x}\right) ^ T\right]=\mathbf{E}\left[\mathbf{A} \mathbf{\xi}^{\mathrm{T}} \mathbf{\xi} \mathbf{A}^{\mathrm{T}}\right]= \mathbf{A} \mathbf{E}\left[\mathbf{\xi}^{\mathrm{T}} \mathbf{\xi} \right] \mathbf{A}^{\mathrm{T}}=\mathbf{A} \Lambda_{\xi} \mathbf{A}^{\mathrm{T}}
+\]
+
+\[
+\mathbf{B}^{\mathrm{T}} \Lambda_{\xi}^{-1} \mathbf{B}=\left(\mathbf{A}^{-1}\right)^{\mathrm{T}} \Lambda_{xi}^{-1} \mathbf{A}^{-1}=\left(\mathbf{A} \Lambda_{x} \mathbf{A}^{\mathrm{T}}\right)^{-1}=\Lambda_{\vec{X}}^{-1}
+\]
+
+Засовывая всё обратно, получим:
+
+\[
+f_{\mathbf{\vec{X}}}(\boldsymbol{x})=\frac{1}{(2 \pi)^{k / 2}}\left(\frac{|B|^{2}}{\left|\Lambda_{\xi}\right|}\right)^{1 / 2} \exp \left[-\frac{1}{2}\left(x-\vec{\mu}_{xi}\right)^T\Lambda_{\vec{X}}^{-1}\left(x-\vec{\mu}_{xi} \right)\right]
+\]
+
+Далее, пользуясь свойсвами определителей, преобразуем оставшееся:
+
+
+\[
+\frac{|\mathbf{B}|^{2}}{\left|\Lambda_{\xi}\right|}=  \frac{1}{|\mathbf{A}|^2\left|\Lambda_{\xi}\right|}=
+\frac{1}{|\mathbf{A}|\left|\Lambda_{\xi}\right|\left|\mathbf{A}^{\mathrm{T}}\right|}=\frac{1}{\left|\mathbf{A} \Lambda_{\xi} \mathbf{A}^{\mathrm{T}}\right|}=\frac{1}{\left|\Lambda_{\vec{X}}\right|}
+\]
+
+Получаем искомое:
+\[
+f_{\mathbf{\vec{X}}}(\boldsymbol{x})=\frac{1}{(2 \pi)^{k / 2}\left|\Lambda_{\vec{X}}\right|^{\frac{1}{2}}} \exp \left[-\frac{1}{2}\left(x-\vec{\mu}_{xi}\right)^T\Lambda_{\vec{X}}^{-1}\left(x-\vec{\mu}_{xi} \right)\right]
+\]
+
+
+\subsubsection{ii}
+
+Мы знаем, что 
+$ f_{X_2 | X_1} (x_2 | x_1) = \frac{f_{\vec{X}} (y)}{f_{X_1} (x_1)}$
+
+Нам повезло, мы уже знаем $ f_{\vec{X}} (y) = \frac{1}{2\pi \sqrt{|\Sigma|}} e^{-\frac{1}{2} (y - \vec{\mu})^T \Sigma^{-1} (y - \vec{\mu})}$
+
+И мы даже знаем $ f_{X_1} (x_1) = \frac{1}{\sqrt{2\pi} \sigma_1} e^{-\frac{x_1^2}{2\sigma_1^2}}$
+
+Сделаем предварительные расчеты, а затем найдем нужную функцию:
+\[
+corr(X_1, X_2) = \rho \Rightarrow \cov(X_1, X_2) = \rho \sigma_1 \sigma_2 \Rightarrow |\Sigma| = \sigma_1^2 \sigma_2^2 - (\rho \sigma_1 \sigma_2)^2 = \sigma_1^2 \sigma_2^2 (1 - \rho^2) \ne 0
+\]
+\[
+\Sigma^{-1} = \frac{1}{\sigma_1^2 \sigma_2^2 (1 - \rho^2)}
+\begin{pmatrix}
+\sigma_1^2 & -\rho \sigma_1 \sigma_2 \\
+-\rho \sigma_1 \sigma_2 & \sigma_2^2 \\
+\end{pmatrix}
+=
+\begin{pmatrix}
+\frac{1}{\sigma_2^2 (1 - \rho^2)} & \frac{-\rho}{\sigma_1 \sigma_2 (1 - \rho^2)} \\
+\frac{-\rho}{\sigma_1 \sigma_2 (1 - \rho^2)} & \frac{1}{\sigma_1^2 (1 - \rho^2)} \\
+\end{pmatrix}
+\]
+\[
+(y - \vec{\mu})^T \Sigma^{-1} (y - \vec{\mu}) = (x_1 - \mu_1 \; x_2 - \mu_2)
+\begin{pmatrix}
+\frac{1}{\sigma_2^2 (1 - \rho^2)} & \frac{-\rho}{\sigma_1 \sigma_2 (1 - \rho^2)} \\
+\frac{-\rho}{\sigma_1 \sigma_2 (1 - \rho^2)} & \frac{1}{\sigma_1^2 (1 - \rho^2)} \\
+\end{pmatrix}
+\begin{pmatrix}
+x_1 - \mu_1 \\
+x_2 - \mu_2 \\
+\end{pmatrix}
+=
+\]
+\[
+= \frac{(x_1 - \mu_1)^2}{\sigma_2^2 (1 - \rho^2)} - \frac{2\rho (x_1 - \mu_1)(x_2 - \mu_2)}{\sigma_1 \sigma_2 (1 - \rho^2)} + \frac{(x_2 - \mu_2)^2}{\sigma_1^2 (1 - \rho^2)}
+\]
+Осталось подставить и поделить:
+\[
+f_{X_2 | X_1} (x_2 | x_1) = \frac{\frac{1}{2\pi \sqrt{|\Sigma|}} e^{-\frac{1}{2} (y - \vec{\mu})^T \Sigma^{-1} (y - \vec{\mu})}}{\frac{1}{\sqrt{2\pi}} e^{-\frac{-x_1^2}{2}}} = \frac{\frac{1}{2\pi \sqrt{\sigma_1^2 \sigma_2^2 (1 - \rho^2)}} e^{-\frac{1}{2} \left(\frac{(x_1 - \mu_1)^2}{\sigma_2^2 (1 - \rho^2)} - \frac{2\rho (x_1 - \mu_1)(x_2 - \mu_2)}{\sigma_1 \sigma_2 (1 - \rho^2)} + \frac{(x_2 - \mu_2)^2}{\sigma_1^2 (1 - \rho^2)}\right)}}{\frac{1}{\sqrt{2\pi}\sigma_1} e^{-\frac{x_1^2}{2\sigma_1^2}}} =
+\]
+\[
+=\frac{1}{\sqrt{2\pi \sigma_2^2 (1 - \rho^2)}} e^{-\frac{1}{2} \left(\frac{(x_1 - \mu_1)^2}{\sigma_2^2 (1 - \rho^2)} - \frac{2\rho (x_1 - \mu_1)(x_2 - \mu_2)}{\sigma_1 \sigma_2 (1 - \rho^2)} + \frac{(x_2 - \mu_2)^2}{\sigma_1^2 (1 - \rho^2)}+\frac{x_1^2}{\sigma_1^2}\right)} =
+\]
+\[
+= \frac{1}{\sigma_2\sqrt{1 - \rho^2}}\frac{1}{\sqrt{2\pi}} e^{-\frac{1}{2} \left(\frac{\sigma_1^2(x_1 - \mu_1)^2 - 2\rho \sigma_1 \sigma_2 (x_1 - \mu_1)(x_2 - \mu_2) + \sigma_2^2(x_2 - \mu_2)^2 + x_1^2 \sigma_2^2 (1 - \rho^2)}{\sigma_1^2 \sigma_2^2 (1 - \rho^2)}\right)} =
+\]
+\[
+= \frac{1}{\sigma_2\sqrt{1 - \rho^2}}\frac{1}{\sqrt{2\pi}} e^{-\frac{1}{2} \left(\frac{x_2 - \mu_2 - \rho(x_1 - \mu_1) \sigma_2 / \sigma_1}{\sigma_2\sqrt{1 - \rho^2}}\right)^2} \, \square
+\]
+
+\subsection{Домашнее задание 8}
+
+
+\subsubsection{Задача 1}
+
+$ \tilde{W}_t $ -- гауссовский процесс?
+
+\[ \gamma = \left( \alpha_1  \tilde{W}_{t_{1}} + \alpha_1 \tilde{W}_{t_{2}} + \cdots + \alpha_1 \tilde{W}_{t_{n}} \right)  = \left(\lambda_1 W_{t_{1}} + \lambda_2 W_{t_{2}} + \cdots + \lambda_n W_{t_{n}} + \lambda_T W_{T}  \right) =   \]
+
+\[ = \text{ линейная комбинация нормальных величин } \Rightarrow  \gamma \text{ -- нормальная величина }\] 
+
+Следственно, $ \tilde{W}_t $ -- гауссовский процесс
+
+$ \E(\tilde{W}_t) = 0? $
+
+При $ T \le T $:
+
+\[ \E(\tilde{W}_t) = \E(W_t) = 0 \]
+
+При $ T > T $:
+
+\[ \E(\tilde{W}_t) = \E(2W_T - W_t) = 0 \]
+
+Найдём ковариационную функцию
+
+При $ t,s  \le T $:
+
+\[ \cov(X_t, X_s) = \cov(W_t, W_s) = \min(t,s) \]
+
+При  $ t,s > T $:
+
+\[ \cov(X_t, X_t) = \cov(2W_T - W_t, 2W_T - W_s) = 4T - 2T - 2T + \min(t,s) \]
+
+При  $ t > T, s \le T $ ( $ t \le T, s > T $ -- аналогично):
+
+\[ \cov(X_t, X_t) = \cov(2W_T - W_t, W_s) =  2s - min(t,s) = 2s-s = s = min(t,s)\]
+
+Следовательно, $ \tilde{W}_t $ -- BM
+
+\subsubsection{Задача 2}
+
+\subsubsection{i}
+
+$ X = e^{2W_t} $
+
+ \[ \vec{X} = \left( X_{t_1}, X_{t_2}, \cdots, X_{t_n} \right) = \left( e^{2W_1}, e^{2W_2}, \cdots, e^{2W_n} \right)  \]
+ 
+ \[ \gamma =  \lambda_1 e^{2W_1} + \lambda_2 e^{2W_2} + \cdots +  e^{2W_n} \not\sim N \]
+ 
+Так как при $ \lambda_i > 0$ $ \forall i \in \overline{1,n} $  случайная величина $ \gamma > 0 $
+
+\subsubsection{ii}
+
+\[ \E(e^{2W_t})  = \int_{-\infty}^{+\infty} \frac{1}{\sqrt{2\pi t}}  e^{2x - \frac{x^2}{2t}} = \int_{-\infty}^{+\infty} \frac{1}{\sqrt{2\pi t}}  e^{\frac{4xt - x^2}{2t}} dx = \int_{-\infty}^{+\infty} \frac{1}{\sqrt{2\pi t}}  e^{-\frac{(x-2t)^2}{2t} + 2t} dx = \]
+
+\[ \frac{e^{2t}}{\sqrt{2\pi t}}  \int_{-\infty}^{+\infty}   e^{\frac{4xt - x^2}{2t}} dx = \Biggr| \frac{x - 2t}{\sqrt{2t}} = u \Biggr| =  \frac{e^{2t}}{\sqrt{2\pi t}}  \int_{-\infty}^{+\infty}  e^{-u^2}  \sqrt{2t}  dx = \frac{2 e^{2t}}{\sqrt{2\pi t}}  \int_{0}^{+\infty}  e^{-u^2}  \sqrt{2t}  dx = \]
+
+Далее замечаем в интеграле кусочек error function:
+
+\[
+\operatorname{erf}(z) \equiv \frac{2}{\sqrt{\pi}} \int_{0}^{z} e^{-r^{2}} d t
+\]
+
+Преобразуем наше выражение:
+
+\[ =  \frac{2 \sqrt{2t} e^{2t}}{\sqrt{2\pi t}}  \lim\limits_{z \to +\infty} \frac{\sqrt{\pi}}{2} \frac{2}{\sqrt{\pi}} \int_{0}^{+\infty} e^{-u^2}   dx = e^{2t} \lim\limits_{z \to +\infty}  \frac{2}{\sqrt{\pi}} \int_{0}^{+\infty} e^{-u^2}   dx = e^{2t} \]
+
+Предел error function равен 1 на $ +\infty $
+
+\subsubsection{Задача 3}
+
+
+\subsubsection{Задача 4}
+
+Воспользуемся формулой из предыдущего дз, осознавая $ t_1 < t_2 $ и $ \vec{\mu}_{xi} = \vec{0  } $:
+
+\[
+f_{\mathbf{\vec{X}}}(\boldsymbol{x})=\frac{1}{(2 \pi)^{k / 2}\left|\Lambda_{\vec{X}}\right|^{\frac{1}{2}}} \exp \left[-\frac{1}{2}\left(x-\vec{\mu}_{xi}\right)^T\Lambda_{\vec{X}}^{-1}\left(x-\vec{\mu}_{xi} \right)\right]
+\]
+
+Где 
+
+\[ \Lambda_{\vec{X}}  = \begin{pmatrix}
+t_1 & t_1 \\
+t_1 & t_2
+\end{pmatrix}\]
+
+\[ \Lambda_{\vec{X}}^{-1}  = \frac{1}{t_1 t_2 - t_1^2} \begin{pmatrix}
+t_2 & -t_1 \\
+-t_1 & t_1
+\end{pmatrix}\]
+
+\[ |\Lambda_{\vec{X}}|^{-\frac{1}{2}} = \sqrt{t_1 t_2 - t_1^2} \]
+
+
+Засунем всё это в формулу.
+
+\[ \]
+
+\[ f_{\vec{W}} = \frac{1}{2 \pi \sqrt{t_1 t_2 - t_1^2}} e^{-\frac{1}{2}  \frac{1}{t_1 t_2 - t_1^2} \begin{pmatrix}
+	x_1 & x_2
+	\end{pmatrix}
+	\begin{pmatrix}
+	t_2 & -t_1\\
+	-t_1 & t_1
+	\end{pmatrix} \begin{pmatrix}
+	x_1\\
+	x_2
+	\end{pmatrix} }  = \frac{1}{2 \pi \sqrt{t_1 t_2 - t_1^2}} e^{-\frac{1}{2}  \frac{ x_1^2 t_2 - 2 x_1 x_2 t_1 + x_2^2 t_1 }{t_1 t_2 - t_1^2}} =  \]
+
+
+\[ 
+\frac{1}{2 \pi \sqrt{t_1 t_2 - t_1^2}} e^{-\frac{1}{2}  \frac{ - x_1^2(t_2 - t_1) - t_1(x_2 - x_1) ^ 2 }{t_1 t_2 - t_1^2}}  =  \frac{1}{2 \pi \sqrt{t_1 t_2 - t_1^2}} e^{  -\frac{1}{2} \frac{x_1^2}{t_1} - \frac{1}{2} \frac{(x_2 - x_1)^2}{t_2 - t_1} } = 
+ \]
+ 
+ \[ \frac{1}{\sqrt{2 \pi} \sqrt{t_2 - t_1}} e^{  - \frac{1}{2} \frac{(x_2 - x_1)^2}{t_2 - t_1} } \frac{1}{\sqrt{2 \pi} \sqrt{t_1}} e^{  -\frac{1}{2} \frac{x_1^2}{t_1}   } = \phi_{\left(0, t_{2}-t_{1}\right)}\left(x_{2}-x_{1}\right) \phi_{\left(0, t_{1}\right)}\left(x_{1}\right)
+ \]
+\subsubsection{Задача 5}
+
+
+\subsubsection{Задача 6}
 
 \end{document}
